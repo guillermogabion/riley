@@ -46,9 +46,8 @@ export default {
     data() {
         return {
             menus : [
-                {title : 'Items', icon: "mdi-bullseye-arrow", route: '/setting/item'  },
-                {title : 'Delivery',  icon: "mdi-bullseye-arrow", route: '/setting/delivery' },
-                {title : 'Category',  icon: "mdi-bullseye-arrow", route: '/setting/category' },
+                {title : 'Food/Drinks', icon: "mdi-bullseye-arrow", route: '/setting/item'  },
+                {title : 'Supplies',  icon: "mdi-bullseye-arrow", route: '/setting/category' },
              
             ]
         }
@@ -58,14 +57,14 @@ export default {
 
 <style scoped>
 .v-list-item--active {
-    background-color: #4caf50;
-    color: #f4f4f4 !important;
+    background-color: yellow;
+    /* color: #f4f4f4 !important; */
     margin: 4%;
     padding-bottom: 2%;
     
 }
 .hover:hover {
-    background-color: #4caf50!important;
+    background-color: yellow!important;
     color: #040404 !important;
     margin: 4%;
     padding-bottom: 2%;

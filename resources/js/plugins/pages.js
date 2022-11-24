@@ -1,15 +1,16 @@
 import Main from '../pages/Main.vue'
 import Login from '../pages/Login.vue'
 import Dashboard from '../pages/Admin/Dashboard.vue'
-// employee 
-import Employee from '../pages/Admin/Employee/index.vue'
-import AddEmployee from '../pages/Admin/Employee/includes/add.vue'
-import About from '../pages/Admin/About.vue'
+// User
+import User from '../pages/Users/index.vue'
+
+// Reservations
+import Reservation from '../pages/Reservations/index.vue'
+
 import Chat from '../layouts/includes/chat/index.vue'
 import Settings from '../pages/settings'
 
 // event 
-import Event from '../pages/Admin/Event/index.vue'
 
 // settings 
 import NavSetting from '../pages/settings/navsetting.vue'
@@ -20,6 +21,19 @@ import Category from '../pages/settings/includes/category.vue'
 import Attendance from '../pages/Attendance.vue'
 
 import AllItems from '../pages/Items/index.vue'
+
+// user part 
+
+import Home from '../userspart/home.vue'
+import Services from '../userspart/services.vue'
+import Menu from '../userspart/menu.vue'
+
+// rentals 
+import Rents from '../pages/Rentals/rental.vue'
+
+// foodtray 
+
+import Foodtray from '../pages/FoodTray/foodtray.vue'
 
 
 export default [{
@@ -38,52 +52,24 @@ export default [{
             component: Dashboard,
             meta: { authOnly: true },
         },
-        // items 
-
+        // reservations
         {
-            path: '/allitems',
-            component: AllItems,
-            meta: { authOnly: true },
-            children: [
-                {
-                    path: '/allitems',
-                    name: 'items',
-                    meta: { authOnly: true },
-                    component : AllItems
-                },
-            ]
-        },
-        // employee 
-        {
-            path: '/attendee',
-            name: 'attendee',
-            component: Employee,
-            meta: { authOnly: true },
-            children : [
-               
-            ]
-        },
-        {
-            path: '/attendee/add',
-            name: 'attendee-add',
-            component: AddEmployee,
+            path: '/reservations',
+            name: 'reservations',
+            component: Reservation,
             meta: { authOnly: true },
         },
 
+    
+        // user
+      
         {
-            path: '/event',
-            name: 'event',
-            component: Event,
+            path: '/users',
+            name: 'users',
+            component: User,
             meta: { authOnly: true },
         },
-
-        {
-            path: '/about',
-            name: 'about',
-            component: About,
-            meta: { authOnly: true },
-        },
-
+    
         {
             path: '/chat',
             name: 'chat',
@@ -121,6 +107,38 @@ export default [{
                 },
 
             ]
+        },
+
+        // user part 
+        {
+            path: '/home',
+            name: 'home',
+            component: Home,
+            meta: { authOnly: true },
+        },
+        {
+            path: '/services',
+            name: 'services',
+            component: Services,
+            meta: { authOnly: true },
+        },
+        {
+            path: '/menu',
+            name: 'menu',
+            component: Menu,
+            meta: { authOnly: true },
+        },
+        {
+            path: '/rentals',
+            name: 'rentals',
+            component: Rents,
+            meta: { authOnly: true },
+        },
+        {
+            path: '/foodtray',
+            name: 'foodtray',
+            component: Foodtray,
+            meta: { authOnly: true },
         },
        
 

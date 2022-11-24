@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-nav-bar :mini="mini" @changeStatusDrawer="mini = !mini"></app-nav-bar>
+        <app-nav-bar :mini="mini" @changeStatusDrawer="mini = !mini" v-if="$is_admin()"></app-nav-bar>
         <app-bar @changeStatusDrawer="mini = !mini"></app-bar>
         <v-main
         class="bg-gray-200 h-full overflow-auto no-scrollbar"
@@ -13,9 +13,9 @@
                
             </transition>
         </v-container>
-        <v-btn fab dark large color="#4caf50" fixed right bottom @click="$router.push('/')">
+        <!-- <v-btn fab dark large color="#4caf50" fixed right bottom @click="$router.push('/')">
         <v-icon dark>mdi mdi-chat</v-icon>
-        </v-btn>
+        </v-btn> -->
         </v-main> 
        
 

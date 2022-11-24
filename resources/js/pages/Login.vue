@@ -91,8 +91,8 @@
 </template>
 
 <script>
-import logo from '../assets/logo.jpg'
-import logocard from '../assets/logocard.png'
+import logo from '../assets/rileylogo.png'
+import logocard from '../assets/rileylogo.png'
 import { mdiEyeOutline, mdiEyeOffOutline } from '@mdi/js'
 import { login } from "../repositories/user.api";
 export default {
@@ -121,6 +121,7 @@ export default {
               this.routeEnter();
           }).catch((errors)=> {
               console.log(errors)
+              alert("Invalid Credentials");
             //   this.snackbar = true
               
           })

@@ -11,37 +11,27 @@ use App\Http\Controllers\ItemController;
 
 Route::group(['prefix' => '/v1'], function () {
     Route::post('login', [UserController::class, 'login'])->name('login');
+    Route::post('register', 'UserController@register');
 });
 Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function () {
 
+    // user 
     Route::get('self', 'UserController@self');
     Route::get('user', 'UserController@index');
-    Route::get('index-event', [EventController::class, 'index']);
-    Route::get('/fit', 'ParticipantController@index');
+    Route::post('updateUser', 'UserController@updateUser');
+    Route::get('search', 'UserController@search');
 
-    Route::post('participant', [ParticipantController::class, 'store']);
-    Route::post('participant/{id}', [ParticipantController::class, 'update']);
-    Route::delete('participant/{id}', [ParticipantController::class, 'destroy']);
-    Route::post('search-participant', [ParticipantController::class, 'search']);
-    Route::get('participants/pagination', [ParticipantController::class, 'pagination']);
-    Route::get('participants/get', [ParticipantController::class, 'index']);
 
-    Route::post('event', [EventController::class, 'store']);
-    Route::post('event/{id}', [EventController::class, 'update']);
-    Route::delete('event/{id}', [EventController::class, 'destroy']);
-    Route::get('events/pagination', [EventController::class, 'pagination']);
+    Route::post('addFood', 'FoodController@addFood');
+    Route::post('editFood/{id}', 'FoodController@editFood');
+    Route::get('searchFood', 'FoodController@search');
 
-    Route::post('record', [RecordController::class, 'store']);
-    Route::post('record-destroy/{id}', [RecordController::class, 'destroy']);
-    Route::post('record/pagination', [RecordController::class, 'destroy']);
+    Route::get('getType', 'TypeController@getAll');
 
-    // category 
-    Route::get('show-category', [CategoryController::class, 'index']);
-    Route::post('add-category', [CategoryController::class, 'store']);
-
-    // item 
-    Route::get('items/pagination', [ItemController::class, 'pagination']);
-    Route::post('items-search', [ItemController::class, 'search']);
-
-    Route::get('get', [RecordController::class, 'get']);
+    // reservations 
+    Route::get('show', 'ReservationController@show');
+    Route::post('addReservation', 'ReservationController@addReservation');
+    Route::post('editReservation/{id}', 'ReservationController@editReservation');
+    Route::put('statusReserve/{id}', 'ReservationController@status');
+    Route::delete('deleteReserve/{id}', 'ReservationController@deleteReserve');
 });

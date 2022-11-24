@@ -45,15 +45,16 @@
    </v-navigation-drawer>
 </template>
 <script>
-import logocard from '../../assets/logocard.png'
+import logocard from '../../assets/rileylogo.png'
 export default {
     data : () => ({
         logocard,
         items : [
             {title : 'Dashboard', icon: 'mdi-view-dashboard', route: '/'},
-            {title : 'Items', icon: 'mdi-view-dashboard', route: '/allitems'},
-            {title : 'Participants', icon: 'mdi mdi-account-group', route: '/attendee'},
-            {title : 'Events', icon: 'mdi mdi-account-group', route: '/event'},
+            {title : 'Users', icon: 'mdi-view-dashboard', route: '/users'},
+            {title : 'Reservations', icon: 'mdi mdi-account-group', route: '/reservations'},
+            {title : 'Rentals', icon: 'mdi mdi-account-group', route: '/rentals'},
+            {title : 'Food Tray', icon: 'mdi mdi-account-group', route: '/foodtray'},
             {title : 'Settings', icon: 'mdi-view-dashboard', route: '/setting'},
         //     {
         //         icon: 'mdi mdi-notebook-multiple',
@@ -146,8 +147,8 @@ export default {
 }
 
 .v-list-item--active {
-    background-color: #4caf50;
-    color: #f4f4f4 !important;
+    background-color: yellow;
+    /* color: #f4f4f4 !important; */
     border-top-left-radius: 10% 50%;
     border-bottom-left-radius: 10% 50%;
     border-top-right-radius: 10% 50%;
@@ -159,7 +160,7 @@ export default {
 
 
 .hover:hover {
-    background-color: #4caf50!important;
+    background-color: yellow!important;
     color: #040404 !important;
     border-top-left-radius: 10% 50%;
     border-bottom-left-radius: 10% 50%;

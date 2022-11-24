@@ -9,7 +9,7 @@
         <v-toolbar
           flat
         >
-          <v-toolbar-title>Categories</v-toolbar-title>
+          <v-toolbar-title>Supplies</v-toolbar-title>
           <v-divider
             class="mx-4"
             inset
@@ -149,8 +149,8 @@ export default {
     dialog: false,
     dialogDelete: false,
     headers: [
-      { text: 'Avatar', value: 'avatar' },
-      { text: 'Category', value: 'name' },
+      { text: 'Name', value: 'name' },
+      { text: 'Quantity', value: 'quantity' },
       { text: 'Actions', value: 'actions', sortable: false },
     ],
     category: [],
