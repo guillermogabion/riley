@@ -22,6 +22,8 @@ class CreateReservationsTable extends Migration
             $table->string('end_date');
             $table->string('package');
             $table->string('dish');
+            $table->string('amount');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

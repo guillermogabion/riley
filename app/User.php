@@ -11,6 +11,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    protected $appends = [
+        'fullname'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -37,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getFullnameAttribute()
+    {
+        $fullname = '';
+        if ($this->first_name) $fullname = ucfirst($this->first_name);
+        if ($this->last_name) $fullname .= ' ' . ucfirst($this->last_name);
+        return $fullname;
+    }
 }

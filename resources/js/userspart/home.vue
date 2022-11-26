@@ -57,7 +57,9 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn>
+                                <v-btn
+                                @click="cateringDialog = true"
+                                >
                                     Book Now
                                 </v-btn>
                                 <v-spacer></v-spacer>
@@ -90,7 +92,9 @@
                             <v-card-actions>
                                 <v-spacer></v-spacer>
 
-                                <v-btn>
+                                <v-btn
+                                @click="trayDialog = true"
+                                >
                                     Order Now
                                 </v-btn>
                                 <v-spacer></v-spacer>
@@ -338,6 +342,242 @@
            
         </v-card>
     </div>
+    <v-dialog
+    v-model="cateringDialog"
+    width="500px"
+    >
+    <v-card>
+        <v-card-title>
+            Book a Catering Schedule
+        </v-card-title>
+        <v-card-text>
+            <v-col>
+                <v-text-field
+                    :rules="rulesEvent" 
+                    v-model="payload.event_type"
+                    label="Event"
+                    outlined
+                ></v-text-field>
+            </v-col>
+            <v-col>
+                <v-text-field
+                    v-model="payload.event_theme"
+                    label="Theme"
+                    outlined
+                ></v-text-field>
+            </v-col>
+            <v-row>
+                <v-col>
+                    <v-menu
+                        v-model="menu2"
+                        :close-on-content-click="false"
+                        :nudge-right="40"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                    >
+                        <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                            v-model="payload.start_date"
+                            label="Start Date"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                            outlined
+                        ></v-text-field>
+                        </template>
+                        <v-date-picker
+                        v-model="payload.start_date"
+                        @input="menu2 = false"
+                        ></v-date-picker>
+                    </v-menu>
+            </v-col>
+            <v-col>
+                <v-menu
+                        v-model="menu"
+                        :close-on-content-click="false"
+                        :nudge-right="40"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                    >
+                        <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                            v-model="payload.end_date"
+                            label="End Date"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                            outlined
+                        ></v-text-field>
+                        </template>
+                        <v-date-picker
+                        v-model="payload.end_date"
+                        @input="menu = false"
+                        ></v-date-picker>
+                    </v-menu>
+            </v-col>
+            </v-row>
+            <v-col>
+                <v-select
+                    :items="packages"
+                    v-model="payload.packages"
+                    filled
+                    item-text="name"
+                    item-value="name"
+                    label="Packages"
+                ></v-select>
+            </v-col>
+            <v-row>
+                <v-col>
+                <v-select
+                    :items="show"
+                    v-model="price"
+                    filled
+                    item-text="price_per_head"
+                    label="Available Price per Head"
+                ></v-select>
+                </v-col>
+                <v-col>
+                <v-text-field
+                v-model="payload.head"
+                outlined
+                :rules="rules" 
+                >
+                </v-text-field>
+                </v-col>
+            </v-row>
+            <v-col>
+                <v-text-field
+                    :rules="rulesAmount" 
+
+                    v-model="payload.amount"
+                    label="Amount"
+                    outlined
+                ></v-text-field>
+                <span style="display: none;">{{this.payload.amount = this.price * this.payload.head}}</span>
+            </v-col>
+            <v-col>
+                <span>Note: If you have set main dishes exceeds to number based on your set package, the first numbers will only be served</span>
+                <v-select
+                    v-model="payload.dish"
+                    :items="food"
+                    chips
+                    label="Main Dishes"
+                    multiple
+                    outlined
+                    item-text="name"
+                ></v-select>
+            </v-col>
+            <v-col>
+                <v-text-field
+                    :rules="rulesCash" 
+
+                    v-model="payload.gcash"
+                    label="GCash Number"
+                    outlined
+                ></v-text-field>
+            </v-col>
+            <v-col>
+                <v-text-field
+                    :rules="rulesEmail" 
+
+                    v-model="payload.email"
+                    label="Email Address"
+                    outlined
+                ></v-text-field>
+            </v-col>
+        </v-card-text>
+        <v-card-actions>
+            <v-spacer></v-spacer>
+                <v-img
+                    src="https://getpaid.gcash.com/assets/img/paynow.png"
+                    max-height="84"
+                    max-width="163"
+                    @click="serve()"
+                ></v-img>
+            <v-spacer></v-spacer>
+        </v-card-actions>
+    </v-card>
+    </v-dialog>
+    <v-dialog
+    v-model="trayDialog"
+    width="500px"
+    >
+    <v-card>
+       <v-card-title>
+        Food Tray Order
+       </v-card-title>
+       <v-card-text>
+        <v-col>
+            <v-select
+                :items="food"
+                v-model="payloadTray.order"
+                filled
+                item-text="name"
+                item-value="name"
+                label="Order"
+            ></v-select>
+        </v-col>
+        <v-col>
+                <v-text-field
+                    :rules="rulesCash" 
+
+                    v-model="payloadTray.pricetray"
+                    label="GCash Number"
+                    outlined
+                ></v-text-field>
+            </v-col>
+        <v-col>
+                <v-text-field
+                    :rules="rulesCash" 
+
+                    v-model="payloadTray.quantity"
+                    label="GCash Number"
+                    outlined
+                ></v-text-field>
+            </v-col>
+        <v-col>
+                <v-text-field
+                    :rules="rulesCash" 
+
+                    v-model="payloadTray.total"
+                    label="GCash Number"
+                    outlined
+                ></v-text-field>
+            </v-col>
+            <v-col>
+                <v-text-field
+                    :rules="rulesCash" 
+                    v-model="payloadTray.gcashtray"
+                    label="GCash Number"
+                    outlined
+                ></v-text-field>
+            </v-col>
+            <v-col>
+                <v-text-field
+                    :rules="rulesEmail" 
+                    v-model="payloadTray.emailtray"
+                    label="Email Address"
+                    outlined
+                ></v-text-field>
+            </v-col>
+       </v-card-text>
+       <v-card-actions>
+            <v-spacer></v-spacer>
+                <v-img
+                    src="https://getpaid.gcash.com/assets/img/paynow.png"
+                    max-height="84"
+                    max-width="163"
+                    @click="serveTray()"
+                ></v-img>
+            <v-spacer></v-spacer>
+        </v-card-actions>
+    </v-card>
+    </v-dialog>
+
 </div>
 <div
 v-else
@@ -367,6 +607,7 @@ import fork from '../assets/logos/Untitled-removebg-preview (2).png'
 import fork2 from '../assets/logos/Untitled2-removebg-preview (2).png'
 import fork3 from '../assets/logos/Untitled3-removebg-preview.png'
 import logo from '../assets/rileylogo.png'
+import axios from '../plugins/axios'
     export default {
         data() {
             return {
@@ -391,6 +632,7 @@ import logo from '../assets/rileylogo.png'
                 fork2,
                 fork3,
                 model: 0,
+                price: '',
                 colors: [
                     'primary',
                     'secondary',
@@ -398,7 +640,127 @@ import logo from '../assets/rileylogo.png'
                     'red',
                     'orange',
                 ],
+                cateringDialog: false,
+                trayDialog: false,
+                packages:[],
+                show: [],
+                dish: [],
+                food: [],
+                menu: false,
+                modal: false,
+                menu2: false,
+
+                payload: {
+                    amount:'',
+                    event_type: '',
+                    event_theme: '',
+                    packages: '',
+                    dish: '',
+                    dish: '',
+                    gcash: '',
+                    email: '',
+                    amount: '',
+                    start_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+                    end_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+                    price_per_head: '',
+                    head: '',
+                  
+                },
+                payloadTray: {
+                    order: '',
+                    pricetray: '',
+                    quantity: '',
+                    total: '',
+                    gcashtray: '',
+                    emailtray: ''
+                },
+                rules: [
+                    v => !!v || 'Required',
+                    v => v >= 100 || 'Head count should not below 100',
+                    v => v <= 1000 || 'Max should not be above 1000',
+                ],
+                rulesEvent: [
+                    v => !!v || 'Required',
+                ],
+                rulesAmount: [
+                    v => !!v || 'Required',
+               
+                ],
+                rulesDish: [
+                    v => !!v || 'Required',
+                   
+                ],
+                rulesCash: [
+                    v => !!v || 'Required',
+                ],
+                rulesEmail: [
+                    v => !!v || 'Required',
+                ],
             }
+        },
+        methods: {
+            getPackage(){
+                axios.get('getPack').then(response => {
+                    console.log(response.data)
+                    this.packages = response.data
+                })
+            },
+            packageShow(key){
+                axios.post('packShow', {searchkey:key}).then(response => {
+                    this.show = response.data
+                  
+                })
+            },
+
+            dishShow(){
+                axios.get('getFood2').then(response=> {
+                    console.log(response.data)
+                    this.food = response.data
+                })
+            },
+            serve(){
+                axios.post('addReservation', this.payload).then(response => {
+                    console.log(response.data)
+                    this.close();
+                    alert('Your Reservation is Submitted');
+                    this.cateringDialog = false
+                    
+                })
+            },
+            serveTray(){
+                axios.post('serveTray', this.payloadTray).then(response => {
+                    console.log(response.data)
+                    this.close();
+                    alert('Your Reservation is Submitted');
+                    this.cateringDialog = false
+                    
+                })
+            },
+            close(){
+                this.cateringDialog = false
+                this.payload = ''
+            }
+
+
+        },
+        mounted(){
+            this.getPackage()
+            this.dishShow()
+        },
+        watch: {
+            "payload.packages": {
+            handler(val) {
+               this.packageShow(val);
+            },
+            deep: true,
+        },
+
+        "cateringDialog": {
+            handler(val){
+                val || this.close
+            }
+        }
+       
         }
     }
 </script>

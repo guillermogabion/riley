@@ -19,6 +19,7 @@ class CreatePackagesTable extends Migration
             $table->string('course');
             $table->string('pax');
             $table->string('price_per_head');
+            $table->longText('set_up');
             $table->timestamps();
         });
     }

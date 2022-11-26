@@ -60,6 +60,11 @@ class FoodController extends Controller
 
     public function search()
     {
+        $data = Food::where('type', 'Dish')->get();
+        return $data;
+    }
+    public function search2()
+    {
         $data = Food::get();
         return $data;
     }

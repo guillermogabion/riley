@@ -51,11 +51,11 @@ export default {
         logocard,
         items : [
             {title : 'Dashboard', icon: 'mdi-view-dashboard', route: '/'},
-            {title : 'Users', icon: 'mdi-view-dashboard', route: '/users'},
-            {title : 'Reservations', icon: 'mdi mdi-account-group', route: '/reservations'},
-            {title : 'Rentals', icon: 'mdi mdi-account-group', route: '/rentals'},
-            {title : 'Food Tray', icon: 'mdi mdi-account-group', route: '/foodtray'},
-            {title : 'Settings', icon: 'mdi-view-dashboard', route: '/setting'},
+            {title : 'Users', icon: 'mdi-account-group', route: '/users'},
+            {title : 'Reservations', icon: 'mdi mdi-clipboard-outline', route: '/reservations'},
+            {title : 'Rentals', icon: 'mdi-alpha-r-box', route: '/rentals'},
+            {title : 'Food Tray', icon: 'mdi mdi-food', route: '/foodtray'},
+            {title : 'Settings', icon: 'mdi mdi-toolbox', route: '/setting'},
         //     {
         //         icon: 'mdi mdi-notebook-multiple',
         //         'icon-alt': 'mdi mdi-notebook-multiple',
@@ -147,7 +147,7 @@ export default {
 }
 
 .v-list-item--active {
-    background-color: yellow;
+    background-color: #ffc107;
     /* color: #f4f4f4 !important; */
     border-top-left-radius: 10% 50%;
     border-bottom-left-radius: 10% 50%;
@@ -160,7 +160,7 @@ export default {
 
 
 .hover:hover {
-    background-color: yellow!important;
+    background-color: #ffc107!important;
     color: #040404 !important;
     border-top-left-radius: 10% 50%;
     border-bottom-left-radius: 10% 50%;

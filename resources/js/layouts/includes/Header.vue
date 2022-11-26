@@ -1,5 +1,5 @@
 <template>
-   <v-app-bar app absolute  :color="$is_admin() ? 'yellow' : 'black'" class="text-white">
+   <v-app-bar app absolute  :color="$is_admin() ? '#ffc107' : 'black'" class="text-white">
       <v-app-bar-nav-icon @click.stop="$emit('changeStatusDrawer')" color="white" v-if="$is_admin()"></v-app-bar-nav-icon>
       <div>
 

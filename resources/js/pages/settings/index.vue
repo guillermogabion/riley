@@ -46,8 +46,8 @@ export default {
     data() {
         return {
             menus : [
-                {title : 'Food/Drinks', icon: "mdi-bullseye-arrow", route: '/setting/item'  },
-                {title : 'Supplies',  icon: "mdi-bullseye-arrow", route: '/setting/category' },
+                {title : 'Food/Drinks', icon: "mdi mdi-food", route: '/setting/item'  },
+                {title : 'Supplies',  icon: 'mdi-alpha-s-box', route: '/setting/category' },
              
             ]
         }
@@ -57,14 +57,14 @@ export default {
 
 <style scoped>
 .v-list-item--active {
-    background-color: yellow;
+    background-color: #ffc107;
     /* color: #f4f4f4 !important; */
     margin: 4%;
     padding-bottom: 2%;
     
 }
 .hover:hover {
-    background-color: yellow!important;
+    background-color: #ffc107!important;
     color: #040404 !important;
     margin: 4%;
     padding-bottom: 2%;

@@ -17,6 +17,10 @@
         :items="reserve"
         :search="search"
         >
+
+        <!-- <template v-slot:item.status = "{item}">
+                
+        </template> -->
         </v-data-table>
        </v-card>
     </div>
@@ -31,7 +35,7 @@ export default {
                 text: 'Name',
                 align: 'start',
                 sortable: false,
-                value: 'name',
+                value: 'users.fullname',
                 },
                 { text: 'Celebration', value: 'event_type' },
                 { text: 'Event Theme', value: 'price' },

@@ -160,17 +160,27 @@ export default {
             axios.post('addFood', this.payload).then(response => {
             console.log(response.data)
             this.show();
+            this.dialog = false
+            this.clear()
           })
         }else {
             axios.post('editFood/' + this.payload.id, this.payload ).then(response => {
             console.log(response.data)
             this.show()
+            this.dialog = false
+            this.clear()
           })
         }
       
       },
       editFood() {
        
+      },
+      clear(){
+        this.$nextTick(() => {
+          this.payload = Object.assign({}, this.payload)
+          this.editedIndex = -1
+        })
       },
 
       getType(){

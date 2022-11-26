@@ -7,7 +7,7 @@ use App\Http\Controllers\RecordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::group(['prefix' => '/v1'], function () {
     Route::post('login', [UserController::class, 'login'])->name('login');
@@ -24,7 +24,7 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
 
     Route::post('addFood', 'FoodController@addFood');
     Route::post('editFood/{id}', 'FoodController@editFood');
-    Route::get('searchFood', 'FoodController@search');
+    Route::get('searchFood', 'FoodController@search2');
 
     Route::get('getType', 'TypeController@getAll');
 
@@ -34,4 +34,18 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
     Route::post('editReservation/{id}', 'ReservationController@editReservation');
     Route::put('statusReserve/{id}', 'ReservationController@status');
     Route::delete('deleteReserve/{id}', 'ReservationController@deleteReserve');
+
+    Route::post('payment', 'GCashController@payment');
+
+    Route::get('getPack', 'PackageController@getPackage');
+    Route::post('packShow', 'PackageController@search');
+
+    Route::get('getFood', 'FoodController@search');
+    Route::get('getFood2', 'FoodController@search2');
+
+    Route::post('serveTray', 'TrayController@addTray');
+
+    // Dashboard 
+    Route::get('details', 'DashboardController@details');
+    Route::post('charts', 'DashboardController@charts');
 });
