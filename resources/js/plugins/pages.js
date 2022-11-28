@@ -1,5 +1,6 @@
 import Main from '../pages/Main.vue'
 import Login from '../pages/Login.vue'
+import Register from '../pages/register.vue'
 import Dashboard from '../pages/Admin/Dashboard.vue'
 // User
 import User from '../pages/Users/index.vue'
@@ -149,6 +150,12 @@ export default [{
     path: '/login',
     name: 'login',
     component: Login,
+    meta: { authOnly: false },
+},
+{
+    path: '/register',
+    name: 'register',
+    component: Register,
     meta: { authOnly: false },
 },
 {

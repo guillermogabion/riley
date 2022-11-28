@@ -56,19 +56,20 @@ class UserController extends Controller
             $data->last_name = $request->last_name;
             $data->birthdate = $request->birthdate;
             $data->address = $request->address;
+            $data->landmark = $request->landmark;
             $data->contact = $request->contact;
             $data->user_type = 0;
             $data->email = $request->email;
             $data->password = Hash::make($request->input('password'));
-            if ($request->photo) {
-                $image = $request->photo;  // your base64 encoded
-                list($type, $image) = explode(';', $image);
-                list(, $image)      = explode(',', $image);
-                $data2 = base64_decode($image);
-                $imageName = date("YmdHis") . '.' . 'jpeg';
-                file_put_contents(public_path() . '/' . 'images/user/' . $imageName, $data2);
-                $data->photo = $imageName;
-            }
+            // if ($request->photo) {
+            //     $image = $request->photo;  // your base64 encoded
+            //     list($type, $image) = explode(';', $image);
+            //     list(, $image)      = explode(',', $image);
+            //     $data2 = base64_decode($image);
+            //     $imageName = date("YmdHis") . '.' . 'jpeg';
+            //     file_put_contents(public_path() . '/' . 'images/user/' . $imageName, $data2);
+            //     $data->photo = $imageName;
+            // }
             $data->save();
             return response()->json([
                 'message' => "Registered",
@@ -89,15 +90,15 @@ class UserController extends Controller
         $data->user_type = 0;
         $data->email = $request->email;
         $data->password = Hash::make($request->input('password'));
-        if ($request->photo) {
-            $image = $request->photo;  // your base64 encoded
-            list($type, $image) = explode(';', $image);
-            list(, $image)      = explode(',', $image);
-            $data2 = base64_decode($image);
-            $imageName = date("YmdHis") . '.' . 'jpeg';
-            file_put_contents(public_path() . '/' . 'images/user/' . $imageName, $data2);
-            $data->photo = $imageName;
-        }
+        // if ($request->photo) {
+        //     $image = $request->photo;  // your base64 encoded
+        //     list($type, $image) = explode(';', $image);
+        //     list(, $image)      = explode(',', $image);
+        //     $data2 = base64_decode($image);
+        //     $imageName = date("YmdHis") . '.' . 'jpeg';
+        //     file_put_contents(public_path() . '/' . 'images/user/' . $imageName, $data2);
+        //     $data->photo = $imageName;
+        // }
         $data->save();
         return response()->json([
             'message' => "Registered",

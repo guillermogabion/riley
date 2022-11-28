@@ -521,12 +521,13 @@
                 label="Order"
             ></v-select>
         </v-col>
+        <span style="display:none;">{{payloadTray.pricetray = this.tray.price}}</span>
         <v-col>
                 <v-text-field
                     :rules="rulesCash" 
 
                     v-model="payloadTray.pricetray"
-                    label="GCash Number"
+                    label="Price"
                     outlined
                 ></v-text-field>
             </v-col>
@@ -535,16 +536,18 @@
                     :rules="rulesCash" 
 
                     v-model="payloadTray.quantity"
-                    label="GCash Number"
+                    label="Quantity"
                     outlined
                 ></v-text-field>
             </v-col>
-        <v-col>
+            
+            <span style="display:none;">{{payloadTray.total = payloadTray.quantity * payloadTray.pricetray}}</span>
+            <v-col>
                 <v-text-field
                     :rules="rulesCash" 
 
                     v-model="payloadTray.total"
-                    label="GCash Number"
+                    label="Total Cost"
                     outlined
                 ></v-text-field>
             </v-col>
@@ -552,7 +555,7 @@
                 <v-text-field
                     :rules="rulesCash" 
                     v-model="payloadTray.gcashtray"
-                    label="GCash Number"
+                    label="Gcash Number"
                     outlined
                 ></v-text-field>
             </v-col>
@@ -646,6 +649,7 @@ import axios from '../plugins/axios'
                 show: [],
                 dish: [],
                 food: [],
+                tray: [],
                 menu: false,
                 modal: false,
                 menu2: false,
@@ -711,6 +715,12 @@ import axios from '../plugins/axios'
                   
                 })
             },
+            OrderShow(key){
+                axios.post('OrderShow', {searchkey:key}).then(response => {
+                    this.tray = response.data
+                  
+                })
+            },
 
             dishShow(){
                 axios.get('getFood2').then(response=> {
@@ -754,12 +764,19 @@ import axios from '../plugins/axios'
             },
             deep: true,
         },
+        "payloadTray.order": {
+        handler(val) {
+            this.OrderShow(val);
+        },
+        deep: true,
+        },
 
         "cateringDialog": {
             handler(val){
                 val || this.close
             }
         }
+    
        
         }
     }

@@ -61,6 +61,7 @@
                                 rounded
                                 color="primary"
                                 class= "mb-2 px-3"
+                                @click="dialog=true"
                             >
                                 Register
                             </v-btn>
@@ -72,25 +73,103 @@
                 </div>
      
     </v-sheet>
-</div>
-     
-
-    <!-- <v-card
-      class="mx-auto"
-      max-width="344"
-      padding-top="20px"
-      outlined
+    <v-dialog
+    width="500px"
+    v-model="dialog"
+    persistent
     >
-      
-  
-      <v-card-actions>
-      
-      </v-card-actions>
-    </v-card> -->
+    <v-card>
+        <v-card-text
+        color="grey"
+        style="padding-top: 1em;"
+        >
+            <span
+            style="font-size: 30px; font-weight: bold;"
+            >Register</span>
+        </v-card-text>
+        <v-col>
+            <v-text-field
+                v-model="payload.first_name"
+                filled
+                rounded
+                dense
+                label="First Name"
+            ></v-text-field>
+            <v-text-field
+                v-model="payload.last_name"
+                filled
+                rounded
+                dense
+                label="Last Name"
+            ></v-text-field>
+            <v-text-field
+                v-model="payload.birthdate"
+                filled
+                rounded
+                dense
+                label="Birth Date"
+            ></v-text-field>
+            <v-text-field
+                v-model="payload.address"
+                filled
+                rounded
+                dense
+                label="Address"
+            ></v-text-field>
+            <v-text-field
+                v-model="payload.landmark"
+                filled
+                rounded
+                dense
+                label="Landmark"
+            ></v-text-field>
+            <v-text-field
+                v-model="payload.contact"
+                filled
+                rounded
+                dense
+                label="Contact Number"
+            ></v-text-field>
+            <v-text-field
+                v-model="payload.email"
+                filled
+                rounded
+                dense
+                label="Email"
+            ></v-text-field>
+    
+            <v-text-field
+                v-model="payload.password"
+                filled
+                rounded
+                dense
+                :type="isPasswordVisible ? 'text' : 'password'"
+                label="Password"
+                placeholder="············"
+                :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
+                @click:append="isPasswordVisible = !isPasswordVisible"
+            
+            ></v-text-field>
+        </v-col>
+        <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+            color="success"
+            @click="register()"
+            >Register</v-btn>
+            <v-btn
+            color="error"
+            @click="registerClose()"
+            >Close</v-btn>
+        </v-card-actions>
+    </v-card>
+    </v-dialog>
+</div>
 </v-app>
 </template>
 
 <script>
+import axios from '../plugins/axios'
 import logo from '../assets/rileylogo.png'
 import logocard from '../assets/rileylogo.png'
 import { mdiEyeOutline, mdiEyeOffOutline } from '@mdi/js'
@@ -107,6 +186,17 @@ export default {
         logocard,
         email: '',
         password: '',
+        dialog: false,
+        payload: {
+            first_name: '',
+            last_name : '',
+            birthdate : '',
+            address : '',
+            landmark : '',
+            contact : '',
+            email : '',
+            password : ''
+        }
     }
    },
    methods : {
@@ -131,6 +221,17 @@ export default {
         },
         routeAttend(){
             this.$router.push('/attendance');
+        },
+
+        registerClose(){
+            this.dialog = false
+        },
+
+        register(){
+            axios.post('register', this.payload).then(response => {
+                console.log(response.data)
+                this.dialog = false
+            })
         }
    }
 }

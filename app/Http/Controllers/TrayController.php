@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Food;
 use App\Tray;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -81,9 +82,9 @@ class TrayController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
-                'x-public-key' => 'pk_a63c3c432c45f68d0607100765d7d768',
+                'x-public-key' => 'pk_aa53096ced53364e971b490ef210320c',
                 'amount' => $request['total'],
-                'description' => 'Payment for' . $request['order'],
+                'description' => 'Payment for' . ' ' . $request['order'],
                 'customermobile' => $request['gcashtray'],
             ),
         ));
@@ -92,5 +93,17 @@ class TrayController extends Controller
 
         curl_close($curl);
         echo $response;
+    }
+
+    public function search(Request $request)
+    {
+        $blog = Food::query();
+        if ($request->input('searchkey') != "") {
+            $keyword = $request->input('searchkey');
+            $blog->where(function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', "%$keyword%");
+            });
+        }
+        return $blog->orderBy('name', 'desc')->first();
     }
 }

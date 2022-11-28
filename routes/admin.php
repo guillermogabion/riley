@@ -44,8 +44,12 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
     Route::get('getFood2', 'FoodController@search2');
 
     Route::post('serveTray', 'TrayController@addTray');
+    Route::get('getTray', 'TrayController@show');
+    Route::put('trayStatus', 'TrayController@status');
 
     // Dashboard 
     Route::get('details', 'DashboardController@details');
     Route::post('charts', 'DashboardController@charts');
+
+    Route::post('OrderShow', 'TrayController@search');
 });

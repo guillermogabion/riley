@@ -98,7 +98,7 @@ class ReservationController extends Controller
             CURLOPT_POSTFIELDS => array(
                 'x-public-key' => 'pk_a63c3c432c45f68d0607100765d7d768',
                 'amount' => $request['amount'],
-                'description' => 'Payment for' . $request['packages'],
+                'description' => 'Payment for' . ' ' . $request['packages'],
                 'customermobile' => $request['gcash'],
             ),
         ));
