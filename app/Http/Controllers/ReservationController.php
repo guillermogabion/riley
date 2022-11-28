@@ -24,7 +24,7 @@ class ReservationController extends Controller
         $data->end_date = $request->end_date;
         $data->amount = $request->amount;
         $data->package = $request->packages;
-        $data->dish = $collection->implode(',');
+        $data->dish = $collection->implode(', ');
 
         $data->status = 0;
 

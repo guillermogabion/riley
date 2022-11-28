@@ -65,7 +65,34 @@ class FoodController extends Controller
     }
     public function search2()
     {
-        $data = Food::get();
+        $data = Food::orderBy('id', 'DESC')->get();
         return $data;
+    }
+
+    public function picture()
+    {
+        return Food::where('status', 1)->get();
+    }
+
+    public function status($id)
+    {
+        $data = Food::find($id);
+        if ($data->status == 0) {
+            $data->update([
+                'status' => 1
+            ]);
+            return response()->json([
+                'message' => 'Activated',
+                'info' => $data
+            ]);
+        } else {
+            $data->update([
+                'status' => 0
+            ]);
+            return response()->json([
+                'message' => 'Activated',
+                'info' => $data
+            ]);
+        }
     }
 }

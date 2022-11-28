@@ -7,7 +7,7 @@
          style="padding-left: 3em"
          v-if="$is_user()"
          >
-         <!-- Riley's Catering Service -->
+         Riley's Catering Service
          </h3>
       </div>
       

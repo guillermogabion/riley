@@ -24,6 +24,21 @@
       :items="food"
       :search="search"
     >
+    <template v-slot:item.status="{ item }">
+      <v-switch
+          color="primary"
+          v-model="item.status"
+          @click="status(item)"
+        ></v-switch>
+    </template>
+    <template v-slot:item.actions="{ item }">
+      <v-icon
+        small
+        class="mr-2"
+      >
+        mdi-pencil
+      </v-icon>
+    </template>
   </v-data-table>
   <v-dialog
   v-model="dialog"
@@ -72,7 +87,7 @@
             filled
             item-text="name"
             item-value="name"
-            label="Filled style"
+            label="Food Classification"
           ></v-select>
           </v-col>
           <v-col
@@ -112,6 +127,7 @@ export default {
         type : '',
         price : ''
       },
+      switch1: false,
       logo,
       dialog: false,
       search: '',
@@ -124,10 +140,8 @@ export default {
         },
         { text: 'Type', value: 'type' },
         { text: 'Price', value: 'price' },
-        // { text: 'Address', value: 'address' },
-        // { text: 'Contact', value: 'contact' },
-        // { text: 'email', value: 'email' },
-        // { text: 'Actions', value: 'actions' },
+        { text : 'Status', value: 'status'},
+        { text : 'Actions', value: 'actions'}
       ],
       food: [],
       type: [],
@@ -188,6 +202,12 @@ export default {
           console.log(response.data)
           this.type = response.data
         })
+      },
+      status(item){
+        axios.put('food_status/' + item.id).then(response=> {
+          console.log(response.data)
+        })
+
       }
   }
 }

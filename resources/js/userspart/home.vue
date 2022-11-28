@@ -137,37 +137,36 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-carousel v-model="model">
+                <v-col>
+                <v-carousel>
                     <v-carousel-item
-                    v-for="(color, i) in colors"
-                    :key="color"
+                    v-for="(item,i) in items"
+                    :key="i"
+                    :src="item.photo"
+                    reverse-transition="fade-transition"
+                    transition="fade-transition"
                     >
-                    <v-sheet
-                        :color="color"
-                        height="100%"
-                        tile
-                    >
-                        <v-row
-                        class="fill-height"
-                        align="center"
-                        justify="center"
-                        >
-                        <div class="text-h2">
-                            Slide {{ i + 1 }}
-                        </div>
-                        </v-row>
-                    </v-sheet>
-                    </v-carousel-item>
+                    <div id="bottom" style="padding-bottom: 5em; ">
+                        <span class="spans" style="color:#ffc107;">{{ item.name }}</span>
+                    </div>
+                </v-carousel-item>
+                    
                 </v-carousel>
-                <span>Featured Dish</span>
+                </v-col>
+                <v-col>
+                    <div
+                    style="text-align: center;"
+                    >
+                        <span
+                        class="spans"
+                        >Featured Dish</span>
+                        <br>
+                        <span class="spans padding"> Themes </span>
+                    </div>
+                </v-col>
             </v-row>
             </div>
-            <div
-            class="center"
-            >
-                <span> Themes  </span>
-            </div>
-          
+               
             <v-row
             class="ma-2"
             >
@@ -650,6 +649,7 @@ import axios from '../plugins/axios'
                 dish: [],
                 food: [],
                 tray: [],
+                items: [],
                 menu: false,
                 modal: false,
                 menu2: false,
@@ -731,31 +731,46 @@ import axios from '../plugins/axios'
             serve(){
                 axios.post('addReservation', this.payload).then(response => {
                     console.log(response.data)
-                    this.close();
-                    alert('Your Reservation is Submitted');
-                    this.cateringDialog = false
+                    this.payload.event_type = ''
+                    this.payload.event_theme = ''
+                    this.payload.start_date = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+                    this.payload.end_date = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+                    this.payload.amount = ''
+                    this.payload.packages = ''
+                    this.payload.dish = ''
+                    this.cateringDialog = false;
                     
                 })
+
             },
             serveTray(){
                 axios.post('serveTray', this.payloadTray).then(response => {
                     console.log(response.data)
                     this.close();
-                    alert('Your Reservation is Submitted');
-                    this.cateringDialog = false
+                    this.trayDialog = false
                     
                 })
+
             },
             close(){
                 this.cateringDialog = false
                 this.payload = ''
+            },
+            foodPicture(){
+                axios.get('foodpicture').then(response => {
+                    console.log(response.data)
+                    this.items = response.data
+                })
             }
+            
+            
 
 
         },
         mounted(){
             this.getPackage()
             this.dishShow()
+            this.foodPicture()
         },
         watch: {
             "payload.packages": {
@@ -786,6 +801,23 @@ import axios from '../plugins/axios'
   margin: auto;
   width: 50%;
   padding: 10px;
+}
+#bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+.spans {
+    display: inline-block;
+    /* float:left;  remove */
+    margin: 10px 10px 0 0;
+    padding: 5px 10px;
+    font-size: 20px;
+
+}
+
+.padding {
+    padding-top: 2em;
 }
 
 </style>

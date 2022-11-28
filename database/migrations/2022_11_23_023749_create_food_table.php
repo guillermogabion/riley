@@ -19,6 +19,7 @@ class CreateFoodTable extends Migration
             $table->string('photo');
             $table->string('price');
             $table->string('type');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

@@ -52,4 +52,7 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
     Route::post('charts', 'DashboardController@charts');
 
     Route::post('OrderShow', 'TrayController@search');
+
+    Route::get('foodpicture', 'FoodController@picture');
+    Route::put('food_status/{id}', 'FoodController@status');
 });
