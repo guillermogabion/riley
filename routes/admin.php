@@ -18,12 +18,15 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
     // user 
     Route::get('self', 'UserController@self');
     Route::get('user', 'UserController@index');
-    Route::post('updateUser', 'UserController@updateUser');
+    Route::get('getProfile', 'UserController@getProfile');
+    Route::post('updateUser/{id}', 'UserController@updateUser');
     Route::get('search', 'UserController@search');
+    Route::delete('deleteUser/{id}', 'UserController@deleteUser');
 
 
     Route::post('addFood', 'FoodController@addFood');
     Route::post('editFood/{id}', 'FoodController@editFood');
+    Route::post('editFoodnoPic/{id}', 'FoodController@editFoodnoPic');
     Route::get('searchFood', 'FoodController@search2');
 
     Route::get('getType', 'TypeController@getAll');
@@ -45,7 +48,7 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
 
     Route::post('serveTray', 'TrayController@addTray');
     Route::get('getTray', 'TrayController@show');
-    Route::put('trayStatus', 'TrayController@status');
+    Route::put('trayStatus/{id}', 'TrayController@status');
 
     // Dashboard 
     Route::get('details', 'DashboardController@details');
@@ -55,4 +58,20 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
 
     Route::get('foodpicture', 'FoodController@picture');
     Route::put('food_status/{id}', 'FoodController@status');
+
+
+    // supply 
+
+    Route::get('getAllSupply', 'SupplyController@getAllSupply');
+    Route::post('addSupply', 'SupplyController@addSupply');
+    Route::post('editSupply/{id}', 'SupplyController@editSupply');
+
+    Route::get('getmyRent', 'RentController@getmyCheckout');
+    Route::post('checkOut', 'RentController@checkOut');
+    Route::put('updateIspaid', 'RentController@updateIspaid');
+    Route::get('shows', 'RentController@show');
+    Route::delete('deleteUnPaid', 'RentController@deleteUnPaid');
+
+    Route::post('payment', 'RentController@payment');
+    Route::delete('deleterent/{id}', 'RentController@deleterent');
 });

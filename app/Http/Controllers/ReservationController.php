@@ -18,10 +18,11 @@ class ReservationController extends Controller
         $collection = collect($request->dish);
 
         $data->user_id = Auth::user()->id;
+        $data->name = $request->name;
         $data->event_type = $request->event_type;
         $data->event_theme = $request->event_theme;
-        $data->start_date = $request->start_date;
-        $data->end_date = $request->end_date;
+        $data->start = $request->start_date;
+        $data->end = $request->end_date;
         $data->amount = $request->amount;
         $data->package = $request->packages;
         $data->dish = $collection->implode(', ');
@@ -44,8 +45,8 @@ class ReservationController extends Controller
         $collection = collect($request->dish);
         $data->event_type = $request->event_type;
         $data->event_theme = $request->event_theme;
-        $data->start_date = $request->start_date;
-        $data->end_date = $request->end_date;
+        $data->start = $request->start_date;
+        $data->end = $request->end_date;
         $data->package = $request->package;
         $data->dish = $collection->implode(',');
 
@@ -96,7 +97,8 @@ class ReservationController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
-                'x-public-key' => 'pk_a63c3c432c45f68d0607100765d7d768',
+                // 'x-public-key' => 'pk_a63c3c432c45f68d0607100765d7d768',
+                'x-public-key' => 'pk_aa53096ced53364e971b490ef210320c',
                 'amount' => $request['amount'],
                 'description' => 'Payment for' . ' ' . $request['packages'],
                 'customermobile' => $request['gcash'],

@@ -120,4 +120,9 @@ class UserController extends Controller
         $data = User::where('user_type', 0)->get();
         return $data;
     }
+
+    public function getProfile()
+    {
+        return User::where('id', Auth::user()->id)->first();
+    }
 }

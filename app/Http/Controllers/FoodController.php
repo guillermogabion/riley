@@ -35,7 +35,9 @@ class FoodController extends Controller
 
         $data->name = $request->name;
         $data->type = $request->type;
-        if ($request->photo) {
+        $data->price = $request->price;
+        if (!$request->photo) {
+        } else {
             $image = $request->photo;  // your base64 encoded
             list($type, $image) = explode(';', $image);
             list(, $image)      = explode(',', $image);
@@ -49,6 +51,20 @@ class FoodController extends Controller
             'message' => "Success"
         ]);
     }
+    public function editFoodnoPic(Request $request, $id)
+    {
+        $data = Food::find($id);
+
+        $data->name = $request->name;
+        $data->type = $request->type;
+        $data->price = $request->price;
+        $data->save();
+        return response()->json([
+            'message' => "Success"
+        ]);
+    }
+
+
 
     public function deleteFood($id)
     {

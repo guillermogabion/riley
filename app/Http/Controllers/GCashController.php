@@ -21,6 +21,7 @@ class GCashController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
+                // 'x-public-key' => 'pk_aa53096ced53364e971b490ef210320c',
                 'x-public-key' => 'pk_a63c3c432c45f68d0607100765d7d768',
                 'amount' => '10032213312',
                 'description' => 'Payment for services rendered',

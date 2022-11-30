@@ -23,6 +23,7 @@
       :headers="headers"
       :items="food"
       :search="search"
+      :loading="loading"
     >
     <template v-slot:item.status="{ item }">
       <v-switch
@@ -35,19 +36,21 @@
       <v-icon
         small
         class="mr-2"
+        @click="editItem(item)"
       >
         mdi-pencil
       </v-icon>
     </template>
   </v-data-table>
+ 
   <v-dialog
   v-model="dialog"
   width="20%"
   >
-  
   <v-card>
     <v-card-title>
       <!-- <span class="text-h5">{{ formTitle }}</span> -->
+      Add New Item
     </v-card-title>
 
     <v-card-text>
@@ -112,6 +115,78 @@
     </v-card-actions>
   </v-card>
   </v-dialog>
+   <v-dialog
+  v-model="editDialog"
+  width="20%"
+  >
+  <v-card>
+    <v-card-title>
+      <!-- <span class="text-h5">{{ formTitle }}</span> -->
+      Edit Item
+    </v-card-title>
+
+    <v-card-text>
+      <v-container>
+        <div class="img-holder">
+            <v-img
+              style="width: 100px; height: 100%;"
+              :src="editedItem.photo || logo"
+            >
+            <div class="upload-options" required style="padding-top: 5px;">
+              <input
+                accept="image/png, image/gif, image/jpeg"
+                id="fileData"
+                type="file"
+                @change="onFileChange"
+                style="padding-left: 20%;"
+                class="fileInput hidden"
+              />
+
+            </div>
+            </v-img>
+          </div>
+          <v-col
+          
+          >
+            <v-text-field
+              label="Name"
+              v-model="editedItem.name"
+            ></v-text-field>
+          </v-col>
+          <v-col
+          
+          >
+            <v-select
+            :items="type"
+            v-model="editedItem.type"
+            filled
+            item-text="name"
+            item-value="name"
+            label="Food Classification"
+          ></v-select>
+          </v-col>
+          <v-col
+          >
+            <v-text-field
+              label="Price"
+              type="number"
+              v-model="editedItem.price"
+            ></v-text-field>
+          </v-col>
+      </v-container>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn
+      @click="editFood()"
+      >
+        Save Changes
+      </v-btn>
+      <v-btn>
+        Close
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+  </v-dialog>
   </v-card>
 </template>
 <script>
@@ -120,6 +195,7 @@ import logo from '../../../assets/logos/cc.png'
 export default {
   data () {
     return {
+      loading: true,
       payload: {
         id : '',
         photo: '',
@@ -145,6 +221,15 @@ export default {
       ],
       food: [],
       type: [],
+      editedItem: {
+        id : '',
+        photo: '',
+        name : '',
+        price: '',
+        type: '',
+      },
+      editedIndex: -1,
+      editDialog : false,
     }
   },
   mounted(){
@@ -156,6 +241,7 @@ export default {
           axios.get('searchFood').then(response => {
               console.log(response.data)
               this.food = response.data
+              this.loading = false
           })
       },
       onFileChange(e) {
@@ -208,7 +294,32 @@ export default {
           console.log(response.data)
         })
 
+      },
+      editItem(item) {
+        this.editedIndex = this.food.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.editDialog = true
+      },
+      editFood(){
+
+        const imageLabel = document.getElementById('fileData');
+
+        let payload = this.editedItem
+        if (imageLabel.value == '') {
+          axios.post('editFoodnoPic/' + payload.id, payload ).then(response =>  {
+          console.log(response.data)
+          this.show()
+          this.editDialog = false
+        })
+        }else {
+          axios.post('editFood/' + payload.id, payload ).then(response =>  {
+          console.log(response.data)
+          this.loading = true
+          this.show()
+          this.editDialog = false
+        })
       }
+    }
   }
 }
 </script>

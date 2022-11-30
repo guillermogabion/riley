@@ -15,7 +15,20 @@
         :headers="headers"
         :items="users"
         :search="search"
+        :loading="loading"
       >
+      <template v-slot:item.actions = "{item}">
+        <v-btn
+        icon
+        @click="deletes(item)"
+        >
+          <v-icon
+          class="mdi mdi-trash-can"
+          >
+          </v-icon>
+        </v-btn>
+       
+      </template>
     </v-data-table>
     </v-card>
   </template>
@@ -39,6 +52,7 @@
           { text: 'Actions', value: 'actions' },
         ],
         users: [],
+        loading: true
       }
     },
     mounted(){
@@ -47,9 +61,16 @@
     methods: {
         show(){
             axios.get('search').then(response => {
+               this.loading = false
                 console.log(response.data)
                 this.users = response.data
             })
+        },
+        deletes(item){
+          axios.delete('deleteUser/'+ item.id).then(response => {
+            this.loading = true
+            this.show()
+          })
         }
     }
   }

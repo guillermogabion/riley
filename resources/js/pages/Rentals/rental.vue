@@ -31,24 +31,25 @@ export default {
                 text: 'Name',
                 align: 'start',
                 sortable: false,
-                value: 'name',
+                value: 'users.fullname',
                 },
-                { text: 'Rents', value: 'supply' },
+                { text: 'Rents', value: 'supply_name' },
                 { text: 'Quantity', value: 'quantity' },
-                { text: 'Start Date', value: 'start_date' },
-                { text: 'End Date', value: 'end_date' },
                 { text: 'Status', value: 'status' },
             ],
-            reserve: [],
+            rentals: [],
+            search: '',
         }
     },
-
+    mounted(){
+        this.showAll()
+    },  
     
     methods: {
         showAll(){
-            axios.get('show').then(response => {
+            axios.get('shows').then(response => {
                 console.log(response.data)
-                this.reserve = response.data
+                this.rentals = response.data
             })
         },
         status(){

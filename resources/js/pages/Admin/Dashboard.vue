@@ -142,7 +142,8 @@
                     :events="events"
                     color="primary"
                     type="week"
-                    ></v-calendar>
+                    >
+                    </v-calendar>
                 </v-sheet>
                 </v-col>
                 
@@ -162,6 +163,7 @@
 <script>
 import Home from '../../userspart/home.vue'
 import axios from '../../plugins/axios'
+import moment from 'moment'
 export default {
     components : {
         Home
@@ -185,23 +187,8 @@ export default {
                 yearSold: new Date().getFullYear(),
                 datas: [],
                 datatest: [],
-                today: '2019-01-08',
-                events: [
-                    {
-                    name: 'Weekly Meeting',
-                    start: '2019-01-07 09:00',
-                    end: '2019-01-07 10:00',
-                    },
-                    {
-                    name: `Thomas' Birthday`,
-                    start: '2019-01-10',
-                    },
-                    {
-                    name: 'Mash Potatoes',
-                    start: '2019-01-09 12:30',
-                    end: '2019-01-09 15:30',
-                    },
-                ],
+                today: moment().format('YYYY-MM-DD'),
+                events: [],
             }
     },
     computed: {
@@ -234,6 +221,7 @@ export default {
     },
     
     created(){
+        this.show()
         this.details()
         console.log('created')
         this.is_loaded = false;
@@ -251,6 +239,14 @@ export default {
     },
     
     methods: {
+        show(){
+            axios.get('show').then(response => {
+                console.log(response.data)
+               this.events = response.data
+
+
+            })
+        },
         incrementSold(){
             this.yearSold++;
             // monthlysold

@@ -17,7 +17,26 @@
         :headers="headers"
         :items="reserve"
         :search="search"
+        :loading="loading"
         >
+        <template 
+        v-slot:item.status = "{item}">
+            <v-btn
+            icon
+            @click="status(item)"
+            
+            >
+                <v-icon v-if="item.status==0 "  class="mdi mdi-close-circle"></v-icon>
+                <v-icon v-else class="mdi mdi-check-circle"></v-icon>
+            </v-btn>
+            <!-- <v-btn
+            icon
+            @click="status(item)"
+            v-else
+            >         
+               
+            </v-btn> -->
+        </template>
         </v-data-table>
        </v-card>
     </div>
@@ -33,7 +52,7 @@ export default {
                 text: 'Name',
                 align: 'start',
                 sortable: false,
-                value: 'name',
+                value: 'users.fullname',
                 },
                 { text: 'Order', value: 'order' },
                 { text: 'Quantity', value: 'quantity' },
@@ -43,7 +62,8 @@ export default {
                 { text: 'Status', value: 'status' },
             ],
             reserve: [],
-            search: ''
+            search: '',
+            loading: true
         }
     },
 
@@ -52,11 +72,14 @@ export default {
         showAll(){
             axios.get('getTray').then(response => {
                 console.log(response.data)
+                this.loading = false
                 this.reserve = response.data
             })
         },
-        status(){
-            axios.put('statusReserve' + this.payload.id).then(response => {
+        status(item){
+            axios.put('trayStatus/' + item.id).then(response => {
+                this.loading = true
+                this.showAll()
                 console.log(response.data)
             })
         }

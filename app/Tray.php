@@ -8,6 +8,11 @@ class Tray extends Model
 {
     //
     protected $fillable = [
-        'amount'
+        'amount', 'status'
     ];
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'name');
+    }
 }

@@ -53,17 +53,17 @@ class TrayController extends Controller
 
     public function show()
     {
-        return Tray::orderBy('id', 'DESC')->get();
+        return Tray::with('users')->orderBy('id', 'DESC')->get();
     }
 
     public function status($id)
     {
         $data = Tray::find($id);
         if ($data->status == 0) {
-            $data->update(['status', 1]);
+            $data->update(['status' => 1]);
             return "Served";
         } else {
-            $data->update(['status', 0]);
+            $data->update(['status' => 0]);
             return "Waiting";
         }
     }
@@ -83,6 +83,7 @@ class TrayController extends Controller
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
                 'x-public-key' => 'pk_aa53096ced53364e971b490ef210320c',
+                // 'x-public-key' => 'pk_a63c3c432c45f68d0607100765d7d768',
                 'amount' => $request['total'],
                 'description' => 'Payment for' . ' ' . $request['order'],
                 'customermobile' => $request['gcashtray'],

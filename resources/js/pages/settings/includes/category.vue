@@ -1,9 +1,11 @@
 <template>
+  <div>
     <v-data-table
       :headers="headers"
-      :items="category"
+      :items="supply"
       sort-by="calories"
       class="elevation-1"
+      :loading="loading"
     >
       <template v-slot:top>
         <v-toolbar
@@ -38,39 +40,15 @@
   
               <v-card-text>
                 <v-container>
-                  <v-col>
-                    <div>
-                      <v-avatar
-                        color="orange"
-                        size="200"
-                      >
-                      <v-img
-                        style="width: 500px; height: 100%;"
-                        :src="editedItem.avatar || logo"
-                      >
-                      
-                      <div class="upload-options" required style="padding-top: 5px;">
-                        <input
-                          accept="image/png, image/gif, image/jpeg"
-                          id="fileData"
-                          type="file"
-                          @change="onFileChange"
-                          style="padding-left: 20%;"
-                          class="fileInput hidden"
-                        />
-                      </div>
-                      </v-img>
-                      </v-avatar>
-                    </div>
-                  </v-col>
-                    <v-col
-                    >
                       <v-text-field
                         v-model="editedItem.name"
-                        label="Category Name"
+                        label="Supply Name"
                       ></v-text-field>
-                    </v-col>
-                 
+                      <v-text-field
+                        v-model="editedItem.price"
+                        label="Price"
+                        type="number"
+                      ></v-text-field>
                 </v-container>
               </v-card-text>
   
@@ -138,6 +116,41 @@
         </v-btn>
       </template>
     </v-data-table>
+    <v-dialog
+    v-model="edit"
+    max-width="300px"
+    >
+    <v-card>
+      <v-card-title>
+          Edit Data
+      </v-card-title>
+      <v-card-text>
+        <v-container>
+              <v-text-field
+                v-model="editedItem.name"
+                label="Supply Name"
+              ></v-text-field>
+              <v-text-field
+                v-model="editedItem.price"
+                label="Price"
+                type="number"
+              ></v-text-field>
+        </v-container>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          color="blue darken-1"
+          text
+          @click="edits()"
+        >
+          Save
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+    
+    </v-dialog>
+  </div>
   </template>
 
 <script>
@@ -150,12 +163,13 @@ export default {
     dialogDelete: false,
     headers: [
       { text: 'Name', value: 'name' },
-      { text: 'Quantity', value: 'quantity' },
+      { text: 'Price', value: 'price' },
       { text: 'Actions', value: 'actions', sortable: false },
     ],
-    category: [],
+    supply: [],
     editedIndex: -1,
     editedItem: {
+      id: '',
       name: '',
       avatar: ''
     },
@@ -163,6 +177,8 @@ export default {
       name: '',
       avatar: '',
     },
+    loading: true,
+    edit : false
   }),
 
   computed: {
@@ -182,7 +198,8 @@ export default {
 
   created () {
     // this.initialize()
-    this.showCategory()
+    this.showAll()
+
   },
 
   methods: {
@@ -199,9 +216,9 @@ export default {
       },
 
     editItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      this.editedIndex = this.supply.indexOf(item)
       this.editedItem = Object.assign({}, item)
-      this.dialog = true
+      this.edit = true
     },
 
     deleteItem (item) {
@@ -231,23 +248,47 @@ export default {
       })
     },
 
-    save () {
-      axios.post('add-category', this.editedItem).then((response)=> {
+    save() {
+      axios.post('addSupply', this.editedItem).then((response)=> {
+        this.loading = true
         console.log(response.data);
+        this.showAll()
+        this.dialog = false
+        this.$nextTick(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        })
       })
-      // if (this.editedIndex > -1) {
-      //   Object.assign(this.desserts[this.editedIndex], this.editedItem)
-      // } else {
-      //   this.desserts.push(this.editedItem)
-      // }
-      // this.close()
+   
+    },
+    edits() {
+      axios.post('editSupply/' + this.editedItem.id , this.editedItem).then((response)=> {
+        this.loading = true
+        console.log(response.data);
+        this.showAll()
+        this.edit = false
+        this.$nextTick(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        })
+      })
+   
     },
     showCategory(){
       axios.get('show-category').then((response)=> {
         console.log(response.data)
         this.category = response.data
       })
-    }
+    }, 
+    showAll(){
+      axios.get('getAllSupply').then(response => {
+        console.log(response.data)
+        this.supply = response.data
+        this.loading = false
+
+      })
+    },
+    
   },
 }
 </script>

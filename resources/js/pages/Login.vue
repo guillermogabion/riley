@@ -79,13 +79,13 @@
     persistent
     >
     <v-card>
+        <v-card-title class="text-h5 grey lighten-2">
+          Edit Profile
+        </v-card-title>
         <v-card-text
         color="grey"
         style="padding-top: 1em;"
         >
-            <span
-            style="font-size: 30px; font-weight: bold;"
-            >Register</span>
         </v-card-text>
         <v-col>
             <v-text-field

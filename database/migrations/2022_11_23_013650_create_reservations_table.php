@@ -16,10 +16,11 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->unsigned();
+            $table->string('name');
             $table->string('event_type');
             $table->string('event_theme');
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->string('start');
+            $table->string('end');
             $table->string('package');
             $table->string('dish');
             $table->string('amount');

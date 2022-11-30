@@ -15,12 +15,13 @@ class CreateRentsTable extends Migration
     {
         Schema::create('rents', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('supply');
+            $table->integer('user_id')->unsigned();
+            $table->string('supply_name');
+            $table->string('price');
             $table->string('quantity');
-            $table->string('start_date');
-            $table->string('end_date');
-            $table->string('status');
+            $table->string('total');
+            $table->string('status')->default(0);
+            $table->string('is_paid')->default(0);
             $table->timestamps();
         });
     }

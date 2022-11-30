@@ -20,6 +20,7 @@ class CreateTraysTable extends Migration
             $table->string('price');
             $table->string('quantity');
             $table->string('total');
+            $table->integer('status')->default(0);
 
             $table->timestamps();
         });

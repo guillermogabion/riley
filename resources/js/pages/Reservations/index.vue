@@ -38,7 +38,7 @@ export default {
                 value: 'users.fullname',
                 },
                 { text: 'Celebration', value: 'event_type' },
-                { text: 'Event Theme', value: 'price' },
+                { text: 'Event Theme', value: 'event_theme' },
                 { text: 'Start Date', value: 'start_date' },
                 { text: 'End Date', value: 'end_date' },
                 { text: 'Package', value: 'package' },
@@ -46,6 +46,7 @@ export default {
                 { text: 'Status', value: 'status' },
             ],
             reserve: [],
+            search: '',
         }
     },
 
