@@ -750,7 +750,7 @@
             <v-col>
                 <v-text-field
                     :rules="rulesAmount" 
-
+                    readonly
                     v-model="payload.amount"
                     label="Amount"
                     outlined
@@ -843,7 +843,7 @@
             <v-col>
                 <v-text-field
                     :rules="rulesCash" 
-
+                    readonly
                     v-model="payloadTray.total"
                     label="Total Cost"
                     outlined
@@ -910,7 +910,7 @@
                                 class="mr-2"
                                 @click="editItemSupply(item)"
                                 >
-                                mdi-check
+                                mdi-check-circle
                                 </v-icon>
                             </template>
                             <template v-slot:top>
@@ -936,12 +936,14 @@
                             v-model="editedItem.name"
                             label="Name"
                             outlined
+                            readonly
                         ></v-text-field> 
                         <v-text-field
                             :rules="rulesCash" 
                             v-model="editedItem.price"
                             label="Price"
                             outlined
+                            readonly
                         ></v-text-field> 
                         <v-text-field
                             :rules="rulesCash" 
@@ -955,6 +957,7 @@
                             v-model="editedItem.total"
                             label="Total"
                             outlined
+                            readonly
                         ></v-text-field> 
                     </div>
                     <v-card-actions>
@@ -1013,6 +1016,7 @@
                             v-model="totals.text"
                             label="Total"
                             outlined
+                            readonly
                         ></v-text-field> 
                         </v-card-actions>
                         

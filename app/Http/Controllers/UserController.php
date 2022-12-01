@@ -87,9 +87,9 @@ class UserController extends Controller
         $data->birthdate = $request->birthdate;
         $data->address = $request->address;
         $data->contact = $request->contact;
-        $data->user_type = 0;
+        // $data->user_type = 0;
         $data->email = $request->email;
-        $data->password = Hash::make($request->input('password'));
+        // $data->password = Hash::make($request->input('password'));
         // if ($request->photo) {
         //     $image = $request->photo;  // your base64 encoded
         //     list($type, $image) = explode(';', $image);
