@@ -42,6 +42,13 @@
               >
                 logout
               </v-list-item>
+              <v-list-item
+                dense
+                class="text-capitalize"
+                @click="backHome()"
+              >
+                 Back Home
+              </v-list-item>
             </v-list>
         </v-menu>
         <v-dialog
@@ -154,6 +161,9 @@
           console.log(response.data)
           this.dialog = false
         })
+      },
+      backHome(){
+        window.location.href = '/design';
       }
     },
     mounted(){

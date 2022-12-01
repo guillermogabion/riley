@@ -163,6 +163,12 @@ export default [{
     name: 'attendance',
     component: Attendance,
     meta: {authOnly: true}
+},
+{
+    path: '/design',
+    name: 'origin',
+    meta: {authOnly: false},
+    beforeEnter() {location.href = 'http://localhost/design'}
 }
 ]
 

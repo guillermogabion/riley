@@ -6,19 +6,14 @@
         class="bg-gray-200 h-full overflow-auto no-scrollbar"
         style="height: 100vh; max-height: 100vh;"
         >
-        
         <v-container>
             <transition name="slide-x-transition" mode="out-in">
                 <router-view></router-view>
                
             </transition>
         </v-container>
-        <!-- <v-btn fab dark large color="#4caf50" fixed right bottom @click="$router.push('/')">
-        <v-icon dark>mdi mdi-chat</v-icon>
-        </v-btn> -->
         </v-main> 
-       
-
+        <app-footer></app-footer>
     </div>
 
 </template>
@@ -26,6 +21,7 @@
 import Chat from './chat/index.vue'
 import AppBar from "../includes/Header.vue"
 import AppNavBar from "../includes/Sidebar.vue"
+import AppFooter from "../includes/footer.vue"
 export default {
         data() {
             return {
@@ -37,6 +33,7 @@ export default {
         components:{
              AppBar,
              AppNavBar,
+             AppFooter,
              Chat
         },
     }

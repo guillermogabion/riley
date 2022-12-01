@@ -10,8 +10,8 @@
             elevation="0"
             >
             <v-card-text
-            class="justify-center"
-            style="padding-left: 3em"
+            justify="center"
+            style="padding-left: 5em"
             >
             <div
             class="center"
@@ -30,115 +30,123 @@
     <div>
             <div>
             <v-row>
-                <v-col
-                >
-                    <v-hover
-                    v-slot="{ hover }"
+                <v-col>
+                    <v-row
+                    align="center"
+                    justify="center"
+                    padding="20px"
                     >
+                        <v-hover
+                        v-slot="{ hover }"
+                        >
+                            <v-card
+                            :elevation="hover ? 12 : 2"
+                            width="25%"
+                            class="ma-4"
+                            >
+                                <div
+                                class="center"
+                                >
+                                    <v-img
+                                    :src="fork"
+                                    max-height="150"
+                                    max-width="350"
+                                    contain
+                                    >
+                                    </v-img>
+                                </div>
+                                <v-card-text
+                                class="text-center"
+                                >
+                                   <span style="font-size: 20px">Catering Services</span> 
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                    text
+                                    @click="cateringDialog = true"
+                                    >
+                                        Book Now
+                                    </v-btn>
+                                    <v-spacer></v-spacer>
+                                </v-card-actions>
+                            </v-card>
+                        </v-hover>
+               
+                        <v-hover
+                        v-slot="{ hover }"
+                        >
                         <v-card
-                        :elevation="hover ? 12 : 2"
-                        >
-                            <v-img
-                            :src="fork"
-                            max-height="350"
-                            max-width="550"
-                            contain
+                            :elevation="hover ? 12 : 2"
+                            width="25%"
+                            class="ma-4"
                             >
-                            </v-img>
-                            <v-card-text>
-                                <div class="center">
-                                    <span
-                                        style="font-weight: bold; margin: 0 auto; font-size: 20px; padding-left: 1.2em;"
-                                        >
-                                        Catering Services
-                                    </span> 
-                                </div>
-                                
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                @click="cateringDialog = true"
+                                <div
+                                class="center"
                                 >
-                                    Book Now
-                                </v-btn>
+                                    <v-img
+                                    :src="fork2"
+                                    max-height="150"
+                                    max-width="350"
+                                    contain
+                                    >
+                                    </v-img>
+                                </div>
                                 <v-spacer></v-spacer>
-                            </v-card-actions>
-                        </v-card>
-                    </v-hover>
-                </v-col>
-                <v-col
-                >
-                    <v-hover
-                    v-slot="{ hover }"
-                    >
-                    <v-card
-                        :elevation="hover ? 12 : 2"
+                                <v-card-text
+                                class="text-center"
+                                >
+                                   <span style="font-size: 20px">Food Tray Services</span> 
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                    @click="trayDialog = true"
+                                    text
+                                    >
+                                        Order Now
+                                    </v-btn>
+                                    <v-spacer></v-spacer>
+                                </v-card-actions>
+                            </v-card>
+                        </v-hover>
+                        <v-hover
+                        v-slot="{ hover }"
                         >
-                            <v-img
-                            :src="fork2"
-                            max-height="350"
-                            max-width="550"
-                            contain
+                            <v-card
+                            :elevation="hover ? 12 : 2"
+                            width="25%"
+                            class="ma-4"
                             >
-                            </v-img>
-                            <v-spacer></v-spacer>
-                            <v-card-text>
-                                <div class="center">
-                                    <span
-                                        style="font-weight: bold; margin: 0 auto; font-size: 20px; padding-left: 1.2em;"
-                                        >
-                                        Food Tray Services
-                                    </span> 
-                                </div>
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                @click="trayDialog = true"
+                                <div
+                                class="center"
                                 >
-                                    Order Now
-                                </v-btn>
-                                <v-spacer></v-spacer>
-                            </v-card-actions>
-                        </v-card>
-                    </v-hover>
-                </v-col>
-                <v-col
-                >
-                    <v-hover
-                    v-slot="{ hover }"
-                    >
-                    <v-card
-                        :elevation="hover ? 12 : 2"
-                        >
-                            <v-img
-                            :src="fork3"
-                            max-height="350"
-                            max-width="550"
-                            contain
-                            >
-                            </v-img>
-                            <v-card-text>
-                                <div class="center">
-                                    <span
-                                        style="font-weight: bold; margin: 0 auto; font-size: 20px; padding-left: 1.2em;"
-                                        >
-                                        Party Supplies
-                                    </span> 
+                                    <v-img
+                                    :src="fork3"
+                                    max-height="150"
+                                    max-width="350"
+                                    contain
+                                    >
+                                    </v-img>
                                 </div>
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                @click="supplyDialog = true"
+                                <v-card-text
+                                class="text-center"
                                 >
-                                    Book Now
-                                </v-btn>
-                                <v-spacer></v-spacer>
-                            </v-card-actions>
-                        </v-card>
-                    </v-hover>
+                                   <span style="font-size: 20px">Party Need Rentals</span> 
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                    text
+                                    @click="supplyDialog = true"
+                                    >
+                                        Book Now
+                                    </v-btn>
+                                    <v-spacer></v-spacer>
+                                </v-card-actions>
+                            </v-card>
+                        </v-hover>
+                    </v-row>
                 </v-col>
             </v-row>
                 <v-carousel class="container" style="padding-top: 1em; width:1000px;height:auto;">
@@ -163,471 +171,12 @@
                         class="spans"
                         >Featured Dish</span>
                         <br>
-                        <span class="spans padding"> Themes </span>
+                        
                     </div>
                 </v-col>
             </div>
                
-            <v-row
-            class="ma-2"
-            >
-                <v-col>
-                    <v-hover
-                    v-slot="{ hover }"
-                    >
-                    <v-card
-                    :elevation="hover ? 20 : 2"
-                    width="545"
-                    >
-
-                        <v-img
-                        :src="pc1"
-                        max-height="350"
-                        max-width="550"
-                        >
-                    </v-img>
-                    </v-card>
-                    </v-hover>
-                </v-col>
-                <v-col>
-                    <v-hover
-                    v-slot="{ hover }"
-                    >
-                    <v-card
-                    :elevation="hover ? 20 : 2"
-                    width="545"
-                    >
-                        <v-img
-                        :src="pc2"
-                        height="349"
-                        max-width="550"
-                        >
-                        </v-img>
-                    </v-card>
-                    </v-hover>
-                </v-col>
-                <v-col>
-                    <v-hover
-                    v-slot="{ hover }"
-                    >
-                    <v-card
-                    :elevation="hover ? 20 : 2"
-                    width="545"
-                    >
-                        <v-img
-                        :src="pc3"
-                        height="350"
-                        max-width="550"
-                        >
-                        </v-img>
-                        </v-card>
-                        </v-hover>
-                </v-col>
-            </v-row>
-            <v-row
-            class="ma-2"
-            >
-                <v-col>
-                    <v-hover
-                    v-slot="{ hover }"
-                    >
-                    <v-card
-                    :elevation="hover ? 20 : 2"
-                    width="545"
-                    >
-                    <v-img
-                        :src="pc6"
-                        max-height="350"
-                        max-width="550"
-                        >
-                        </v-img>
-                        </v-card>
-                        </v-hover>
-                </v-col>
-                <v-col>
-                    <v-hover
-                    v-slot="{ hover }"
-                    >
-                    <v-card
-                    :elevation="hover ? 20 : 2"
-                    width="545"
-                    >
-                    <v-img
-                        :src="pc7"
-                        height="350"
-                        max-width="550"
-                        >
-                        </v-img>
-                        </v-card>
-                        </v-hover>
-                </v-col>
-                <v-col>
-                    <v-hover
-                    v-slot="{ hover }"
-                    >
-                    <v-card
-                    :elevation="hover ? 20 : 2"
-                    width="545"
-                    >
-                    <v-img
-                        :src="pc8"
-                        height="350"
-                        max-width="550"
-                        >
-                        </v-img>
-                        </v-card>
-                        </v-hover>
-                </v-col>
-            </v-row>
-            <v-row
-            class="ma-2"
-            >
-                <v-col>
-                    <v-hover
-                    v-slot="{ hover }"
-                    >
-                    <v-card
-                    :elevation="hover ? 20 : 2"
-                    width="545"
-                    >
-                    <v-img
-                        :src="pc4"
-                        height="350"
-                        max-width="550"
-                        >
-                        </v-img>
-                        </v-card>
-                        </v-hover>
-                </v-col>
-                <v-col>
-                    <v-hover
-                    v-slot="{ hover }"
-                    >
-                    <v-card
-                    :elevation="hover ? 20 : 2"
-                    width="545"
-                    >
-                    <v-img
-                        :src="pc5"
-                        height="350"
-                        max-width="550"
-                        >
-                        </v-img>
-                        </v-card>
-                        </v-hover>
-                </v-col>
-                <v-col>
-                    <v-hover
-                    v-slot="{ hover }"
-                    >
-                    <v-card
-                    :elevation="hover ? 20 : 2"
-                    width="545"
-                    >
-                    <v-img
-                        :src="pc9"
-                        height="350"
-                        max-width="550"
-                        >
-                        </v-img>
-                        </v-card>
-                        </v-hover>
-                </v-col>
-            </v-row>
-            <v-row>
-               <v-col>
-                        <v-card
-                        width="70%"
-                        class="container"
-                        >
-                        
-                            <div>
-                                <span class="spans">
-                                    About
-                                </span>
-                            </div>
-                                <v-list>
-                                    <v-list-item-group>
-                                        <v-list-item>
-                                            <v-row>
-                                                
-                                                <v-col>
-                                                <span class="mdi mdi-flag spaces">2015 -  December 2017 - Rodly Palma started with a position of manager in a well-known catering business located in Cavite city</span>
-                                                </v-col>
-                                            </v-row>
-                                        </v-list-item>
-                                        <v-list-item>
-                                            <v-row>
-                                                
-                                                <v-col>
-                                                <span class="mdi mdi-flag">January 2018 - Rodly Palma started his own catering business. He starts with planning and investing catering equipments.</span>
-                                                </v-col>
-                                            </v-row>
-                                            
-                                        </v-list-item>
-                                        <v-list-item>
-                                            <v-row>
-                                            
-                                                <v-col>
-                                                <span class="mdi mdi-flag">January 2018 - Rodly Palma started his own catering business. He starts with planning and investing catering equipments.</span>
-                                                </v-col>
-                                            </v-row>
-                                            
-                                        </v-list-item>
-                                        <v-list-item>
-                                            <v-row>
-                                                <v-col>
-                                                <span class="mdi mdi-flag">Sept 2018- At the last quarter of the year, the business also starts to have a rentals when it comes to party needs.</span>
-                                                </v-col>
-                                            </v-row>
-                                            
-                                        </v-list-item>
-                                        <v-list-item>
-                                            <v-row>
-                                                <v-col>
-                                                <span class="mdi mdi-flag">2019-2020 - The business is booming. They started to offer food pax and package meals. They also added more equipments for party rentals such as; tables, chairs, and kitchen wares.</span>
-                                                </v-col>
-                                            </v-row>
-                                            
-                                        </v-list-item>
-                                        <v-list-item>
-                                            <v-row>
-                                                <v-col>
-                                                <span class="mdi mdi-flag spaces">2021- Present - The business is continuing to expand as they got more and more clients and events.</span>
-                                                </v-col>
-                                            </v-row>
-                                            
-                                        </v-list-item>
-                                    </v-list-item-group>
-                                </v-list>
-                    </v-card>
-               </v-col>
-               
-               
-            </v-row>
-            <v-row>
-                <v-card width="70%" class="container">
-                        <span class="spans">
-                            Contact
-                        </span>
-                        <br>
-                        <span class="spans"> For Inquiries, Please call or send a message to </span>
-                        <br>
-                        <span class="mdi mdi-phone-in-talk" style="font-size: 20px"></span> <span class="spans"> 0918936568 </span>
-                        <br>
-                        <span class="spans"> Or Email us </span>
-                        <br>
-                        <span class="mdi mdi-mail" style="font-size: 20px"></span><span class="spans">rodlypalma@gmail.com</span>
-                        <br>
-                        <span class="spans"> Or visit us on our place</span>
-                        <br>
-                        <span class="mdi mdi-home" style="font-size: 20px"></span><span class="spans"> 520 m. Santos st.  Sta cruz Cavite City </span>
-                </v-card>
-            </v-row>
-            <v-row>
-                <v-col>
-                    <span class="spans">
-                        FAQ's
-                    </span>
-                    <v-card>
-                        <v-list>
-                            <v-list-item-group>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-comment-question">What type of event does Riley’s Catering Service specialize in planning?</span>
-                                        </v-col>
-                                    </v-row>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-alpha-a-box">We specialize in wedding catering and offer birthday packages at reasonable prices, ensuring that clients receive delectable food at an affordable price.</span>
-                                        <br>
-                                        <span>Our full catering and events services include a menu selection as well as thematic floral decoration of the reception area. We assist with every aspect of the celebration, such as selecting a venue, selecting event themes and motifs, and arranging décor. Riley's Catering Service ensures a stress-free experience while staying true to your vision from beginning to end.</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-comment-question">What are your office hours?</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-alpha-a-box">Office Hours: 8:00 AM – 6:00 PM</span>
-                                        </v-col>
-                                    </v-row>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-comment-question">Are there labor charges?</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-alpha-a-box">Waiters are only available for up to 4 hours. Overtime will be charged at the rate of Php50.00 per waiter per hour. If the event is held in a building without a service elevator or if the loading/unloading area is more than 50 meters away from the venue, an additional Php50.00 per floor per waiter is charged</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        
-                                        <v-col>
-                                        <span class="mdi mdi-comment-question">Are there delivery charges?</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-alpha-a-box">Yes, depending on the location, we charge an additional transportation fee.</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        
-                                        <v-col>
-                                        <span class="mdi mdi-comment-question">Do you cater and style events on holidays?</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-alpha-a-box">Yes, even on Christmas and New Year’s Day.</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-comment-question">How the items on your menu are packaged, presented, served, etc.?</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-alpha-a-box">You can select between a buffet-style and a plated-style service (with additional cost). We also provide event staff with pre-packaged meals.</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-comment-question">What can I expect when I work with Riley’s Catering Service?</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-alpha-a-box">Riley's Catering Service will handle your requests professionally, providing you with affordable catering, excellent service, a flexible menu, and a superior product. We will provide a lovely setup and a spotless clean-up. Our full-service catering ensures that your event runs smoothly and is enjoyable.</span>
-                                        </v-col>
-                                    </v-row>
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-comment-question">How do I pay for my order/reservations?</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-alpha-a-box">A reservation fee is required for booking confirmation. A 30% deposit is required 30 days before the event, with the remaining balance due 14 to 10 days before the event. On the day of the event, the client is responsible for any additional charges. Cash or gcash can be used to make payments.</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-comment-question">Can I change my order once it has been placed?</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-alpha-a-box">The menu selection and guarantee of attendance are required 7 days prior to the event.</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-comment-question">What is your cancellation policy?</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-alpha-a-box">The client shall inform the caterer of any cancellation of the function/banquet. The following will apply in the event of cancellation:</span>
-                                        <br>
-                                        <span>
-                                            <li>Seventy percent (70%) of the guaranteed contract price will be charged 72 hours prior to the function date.</li>
-                                            <li>Full payment of the guaranteed contract price will be charged 48 hours prior to the function date.</li>
-                                            <li>A fee of 10% of the contract price will be charged if the contract is canceled "early."</li>
-                                        </span>
-                                        </v-col>
-                                        
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-comment-question">Do you do tastings?</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                                <v-list-item>
-                                    <v-row>
-                                        <v-col>
-                                        <span class="mdi mdi-alpha-a-box">We do, indeed. The tastings are free for the first two people who attend. If you want to bring more than two people, you can do so in advance, but there will be an additional fee per extra person that must be paid by the end of the tasting.</span>
-                                        </v-col>
-                                    </v-row>
-                                    
-                                </v-list-item>
-                               
-                            </v-list-item-group>
-                        </v-list>
-                        
-
-
-
-
-                    </v-card>
-                    
-                </v-col>
-            </v-row>
+            
             
            
     </div>
@@ -743,6 +292,7 @@
                 v-model="payload.head"
                 outlined
                 :rules="rules" 
+                label="Quantity"
                 >
                 </v-text-field>
                 </v-col>
@@ -1034,9 +584,9 @@
                 </v-col>
             </v-row>
        </v-card-text>
-       
     </v-card>
     </v-dialog>
+    
 
 </div>
 <div
@@ -1046,22 +596,7 @@ Page Not Found
 </div>
 </template>
 <script>
-import pc1 from '../assets/themes/theme1-1.jpg'
-import pc2 from '../assets/themes/theme2-1.jpg'
-import pc3 from '../assets/themes/theme3-1.jpg'
-import pc4 from '../assets/themes/theme4-1.jpg'
-import pc5 from '../assets/themes/theme5-1.jpg'
-import pc6 from '../assets/themes/theme6-1.jpg'
-import pc7 from '../assets/themes/theme7-1.jpg'
-import pc8 from '../assets/themes/theme8-1.jpg'
-import pc9 from '../assets/themes/theme9-1.jpg'
-import pc10 from '../assets/themes/theme10-1.jpg'
-import pc11 from '../assets/themes/theme11-1.jpg'
-import pc12 from '../assets/themes/theme12-1.jpg'
-import pc13 from '../assets/themes/theme13-1.jpg'
-import pc14 from '../assets/themes/theme14-1.jpg'
-import pc15 from '../assets/themes/theme15-1.jpg'
-import pc16 from '../assets/themes/theme16-1.jpg'
+
 
 import fork from '../assets/logos/Untitled-removebg-preview (2).png'
 import fork2 from '../assets/logos/Untitled2-removebg-preview (2).png'
@@ -1072,22 +607,6 @@ import axios from '../plugins/axios'
         data() {
             return {
                 logo,
-                pc1,
-                pc2, 
-                pc3, 
-                pc4, 
-                pc5, 
-                pc6, 
-                pc7, 
-                pc8,
-                pc9, 
-                pc10,
-                pc11, 
-                pc12, 
-                pc13, 
-                pc14, 
-                pc15, 
-                pc16,
                 fork,
                 fork2,
                 fork3,
