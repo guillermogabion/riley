@@ -75,10 +75,10 @@ class ReservationController extends Controller
     {
         $data = Reservation::find($id);
         if ($data->status == 0) {
-            $data->update(['status', 1]);
+            $data->update(['status' => 1]);
             return "Served";
         } else {
-            $data->update(['status', 0]);
+            $data->update(['status' => 0]);
             return "Waiting";
         }
     }

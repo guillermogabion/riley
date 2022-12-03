@@ -53,6 +53,8 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
     // Dashboard 
     Route::get('details', 'DashboardController@details');
     Route::post('charts', 'DashboardController@charts');
+    Route::get('records', 'DashboardController@records');
+    Route::get('history', 'DashboardController@history');
 
     Route::post('OrderShow', 'TrayController@search');
 
@@ -71,6 +73,7 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
     Route::put('updateIspaid', 'RentController@updateIspaid');
     Route::get('shows', 'RentController@show');
     Route::delete('deleteUnPaid', 'RentController@deleteUnPaid');
+    Route::put('statusRent/{id}', 'RentController@status');
 
     Route::post('payment', 'RentController@payment');
     Route::delete('deleterent/{id}', 'RentController@deleterent');

@@ -9,6 +9,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class DashboardController extends Controller
@@ -50,5 +51,23 @@ class DashboardController extends Controller
             ];
         }
         return $results;
+    }
+
+    public function history()
+    {
+        return [
+            "catering" => Reservation::where('user_id', Auth::user()->id)->get(),
+            "tray" => Tray::where('name', Auth::user()->id)->get(),
+            "rent" => Rent::where('user_id', Auth::user()->id)->get()
+        ];
+    }
+
+    public function records()
+    {
+        return [
+            "catering" => Reservation::get(),
+            "tray" => Tray::with('users')->get(),
+            "rent" => Rent::get()
+        ];
     }
 }

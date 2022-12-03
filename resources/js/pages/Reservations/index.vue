@@ -18,9 +18,13 @@
         :search="search"
         >
 
-        <!-- <template v-slot:item.status = "{item}">
-                
-        </template> -->
+        <template v-slot:item.status="{ item }">
+        <v-switch
+            color="primary"
+            v-model="item.status"
+            @click="status(item)"
+            ></v-switch>
+        </template>
         </v-data-table>
        </v-card>
     </div>
@@ -58,8 +62,8 @@ export default {
                 this.reserve = response.data
             })
         },
-        status(){
-            axios.put('statusReserve' + this.payload.id).then(response => {
+        status(item){
+            axios.put('statusReserve/' + item.id).then(response => {
                 console.log(response.data)
             })
         }

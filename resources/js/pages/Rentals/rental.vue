@@ -16,7 +16,26 @@
         :headers="headers"
         :items="rentals"
         :search="search"
+        :loading="loading"
         >
+        <template v-slot:item.status="{ item }">
+        <v-btn
+        icon
+        @click="status(item)"
+        >
+        <v-icon
+        v-if="(item.status == 1)"
+        >
+         mdi-checkbox-marked-circle
+        </v-icon>
+        <v-icon
+        v-else
+        >
+         mdi-close-circle
+        </v-icon>
+        </v-btn>
+       
+        </template>
         </v-data-table>
        </v-card>
     </div>
@@ -39,6 +58,7 @@ export default {
             ],
             rentals: [],
             search: '',
+            loading : true
         }
     },
     mounted(){
@@ -49,12 +69,15 @@ export default {
         showAll(){
             axios.get('shows').then(response => {
                 console.log(response.data)
+                this.loading = false
                 this.rentals = response.data
             })
         },
-        status(){
-            axios.put('statusReserve' + this.payload.id).then(response => {
+        status(item){
+            axios.put('statusRent/' + item.id).then(response => {
                 console.log(response.data)
+                this.loading = true
+                this.showAll()
             })
         }
     },

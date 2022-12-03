@@ -19,23 +19,12 @@
         :search="search"
         :loading="loading"
         >
-        <template 
-        v-slot:item.status = "{item}">
-            <v-btn
-            icon
+        <template v-slot:item.status="{ item }">
+        <v-switch
+            color="primary"
+            v-model="item.status"
             @click="status(item)"
-            
-            >
-                <v-icon v-if="item.status==0 "  class="mdi mdi-close-circle"></v-icon>
-                <v-icon v-else class="mdi mdi-check-circle"></v-icon>
-            </v-btn>
-            <!-- <v-btn
-            icon
-            @click="status(item)"
-            v-else
-            >         
-               
-            </v-btn> -->
+            ></v-switch>
         </template>
         </v-data-table>
        </v-card>

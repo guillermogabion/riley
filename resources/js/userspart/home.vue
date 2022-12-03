@@ -586,8 +586,14 @@
        </v-card-text>
     </v-card>
     </v-dialog>
-    
-
+    <div>
+        <v-snackbar
+            v-model="snackbar"
+            :timeout="timeout"
+            >
+            Transaction Successful
+        </v-snackbar>
+    </div>
 </div>
 <div
 v-else
@@ -606,6 +612,8 @@ import axios from '../plugins/axios'
     export default {
         data() {
             return {
+                snackbar: false,
+                timeout: 3000,
                 logo,
                 fork,
                 fork2,
@@ -764,6 +772,7 @@ import axios from '../plugins/axios'
                     this.payload.packages = ''
                     this.payload.dish = ''
                     this.cateringDialog = false;
+                    this.snackbar = true
                     
                 })
 
@@ -771,9 +780,8 @@ import axios from '../plugins/axios'
             serveTray(){
                 axios.post('serveTray', this.payloadTray).then(response => {
                     console.log(response.data)
-                    this.close();
                     this.trayDialog = false
-                    
+                    this.snackbar = true
                 })
 
             },
@@ -810,6 +818,7 @@ import axios from '../plugins/axios'
                 console.log(response.data)
                 this.loading = false
                 this.rent = response.data
+                
             })
            },
            postmyRent(){
@@ -817,12 +826,15 @@ import axios from '../plugins/axios'
                 this.loading = true
                 console.log(response.data)
                 this.getmyCheck();
+                this.snackbar = true
+                
             })
            },
            submitRent(){
             axios.put('updateIspaid').then(response=> {
                 console.log(response.data)
                 this.getmyCheck();
+                this.snackbar = true
                 
             })
             this.$nextTick(() => {
