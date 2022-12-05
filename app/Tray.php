@@ -8,7 +8,7 @@ class Tray extends Model
 {
     //
     protected $fillable = [
-        'amount', 'status'
+        'amount', 'status', 'start'
     ];
     protected $casts = [
         'created_at'  => 'date:m-d-Y',

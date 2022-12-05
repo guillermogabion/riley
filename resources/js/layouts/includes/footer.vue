@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <div
+    v-if="$is_user()"
+    >
         <v-footer
             dark
             padless

@@ -74,6 +74,7 @@ class RentController extends Controller
             $data->price = $request->price;
             $data->quantity = $request->quantity;
             $data->total = $request->total;
+            $data->start = $request->start;
             $data->save();
 
             return $data;

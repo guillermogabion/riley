@@ -133,20 +133,165 @@
                         </v-card>
                     </v-col>
                 </v-row>
+                <v-row>
                 <v-col>
-                <v-sheet height="400">
-                    <v-calendar
-                    ref="calendar"
-                    :now="today"
-                    :value="today"
-                    :events="events"
-                    color="primary"
-                    type="week"
-                    >
-                    </v-calendar>
-                </v-sheet>
+                    <v-sheet>
+                        <span style="font-weight: bold; padding-left: 1em;">
+                            Catering Schedule
+                        </span>
+                    </v-sheet>
+                    <v-sheet>
+                        <v-calendar
+                            ref="calendar"
+                            :weekdays="weekday"
+                            :type="month"
+                            :events="events"
+                            :event-overlap-mode="mode"
+                            :event-overlap-threshold="30"
+                            @click:event="showEvent"
+                            :now="today"
+                        ></v-calendar>
+                        <v-menu
+                            v-model="selectedOpen"
+                            :close-on-content-click="false"
+                            :activator="selectedElement"
+                            offset-x
+                            >
+                            <v-card
+                                color="grey lighten-4"
+                                min-width="350px"
+                                flat
+                            >
+                                <v-toolbar
+                                :color="selectedEvent.color"
+                                dark
+                                >
+                                <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                                </v-toolbar>
+                                <v-card-text>
+                                <span v-html="selectedEvent.event_type"></span><br>
+                                <span v-html="selectedEvent.start"></span><br>
+                                <span v-html="selectedEvent.package"></span><br>
+                                <span v-html="selectedEvent.dish"></span>
+                                </v-card-text>
+                                <v-card-actions>
+                                <v-btn
+                                    text
+                                    color="secondary"
+                                    @click="selectedOpen = false"
+                                >
+                                    Cancel
+                                </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-menu>
+                    </v-sheet>
                 </v-col>
                 
+                
+                <v-col>
+                    <v-sheet>
+                        <span style="font-weight: bold; padding-left: 1em;">
+                            Order Delivery Schedule
+                        </span>
+                    </v-sheet>
+                    <v-sheet>
+                        <v-calendar
+                            ref="calendar"
+                            :weekdays="weekday"
+                            :type="month"
+                            :events="myshow"
+                            :event-overlap-mode="mode"
+                            :event-overlap-threshold="30"
+                            :now="today"
+                            @click:event="showEvent2"
+                        ></v-calendar>
+                        <v-menu
+                            v-model="selectedOpen2"
+                            :close-on-content-click="false"
+                            :activator="selectedElement2"
+                            offset-x
+                            >
+                            <v-card
+                                color="grey lighten-4"
+                                min-width="350px"
+                                flat
+                            >
+                                <v-toolbar
+                                :color="selectedEvent2.color"
+                                dark
+                                >
+                                <!-- <v-toolbar-title v-html="selectedEvent2.fullname"></v-toolbar-title> -->
+                                </v-toolbar>
+                                <v-card-text>
+                                <span v-html="selectedEvent2.order"></span><br>
+                                <span v-html="selectedEvent2.quantity"></span><br>
+                                </v-card-text>
+                                <v-card-actions>
+                                <v-btn
+                                    text
+                                    color="secondary"
+                                    @click="selectedOpen2 = false"
+                                >
+                                    Cancel
+                                </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-menu>
+                    </v-sheet>
+                </v-col>
+                <v-col>
+                    <v-sheet>
+                        <span style="font-weight: bold; padding-left: 1em;">
+                            Rentals Schedule
+                        </span>
+                    </v-sheet>
+                    <v-sheet>
+                        <v-calendar
+                            ref="calendar"
+                            :weekdays="weekday"
+                            :type="month"
+                            :events="myrent"
+                            :event-overlap-mode="mode"
+                            :event-overlap-threshold="30"
+                            :now="today"
+                            @click:event="showEvent3"
+                        ></v-calendar>
+                        <v-menu
+                            v-model="selectedOpen3"
+                            :close-on-content-click="false"
+                            :activator="selectedElement3"
+                            offset-x
+                            >
+                            <v-card
+                                color="grey lighten-4"
+                                min-width="350px"
+                                flat
+                            >
+                                <v-toolbar
+                                :color="selectedEvent3.color"
+                                dark
+                                >
+                                <!-- <v-toolbar-title v-html="selectedEvent2.fullname"></v-toolbar-title> -->
+                                </v-toolbar>
+                                <v-card-text>
+                                <span v-html="selectedEvent3.supply_name"></span><br>
+                                <span v-html="selectedEvent3.quantity"></span><br>
+                                </v-card-text>
+                                <v-card-actions>
+                                <v-btn
+                                    text
+                                    color="secondary"
+                                    @click="selectedOpen2 = false"
+                                >
+                                    Cancel
+                                </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-menu>
+                    </v-sheet>
+                </v-col>
+            </v-row>
             </div>
         <br/>
     </v-card>
@@ -171,8 +316,16 @@ export default {
     data() {
         
         return {
-          
-           
+            selectedEvent: {},
+            selectedElement: null,
+            selectedOpen: false,
+            selectedEvent2: {},
+            selectedElement2: null,
+            selectedOpen2: false,
+            selectedEvent3: {},
+            selectedElement3: null,
+            selectedOpen3: false,
+            weekday: [0, 1, 2, 3, 4, 5, 6],
             is_loaded: false,
             chartSold: {
             labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -189,6 +342,15 @@ export default {
                 datatest: [],
                 today: moment().format('YYYY-MM-DD'),
                 events: [],
+                trays : [
+                name => users.fullname
+
+                ],
+                rents : [
+                ],
+                mode: 'stack',
+                modes: ['stack', 'column'],
+                month : 'month'
             }
     },
     computed: {
@@ -217,11 +379,29 @@ export default {
                 })
             }
             return series
-        }
+        },
+       myshow(){
+        const trays = this.trays
+        trays.forEach((element) => {
+            element.start = element.start
+            element.name = element.users.fullname
+        })
+        return trays
+       },
+       myrent(){
+        const rents = this.rents
+        rents.forEach((element) => {
+            element.start = element.start
+            element.name = element.users.fullname
+        })
+        return rents
+       }
     },
     
     created(){
         this.show()
+        this.showTray()
+        this.showRent()
         this.details()
         console.log('created')
         this.is_loaded = false;
@@ -239,12 +419,73 @@ export default {
     },
     
     methods: {
+        showEvent ({ nativeEvent, event }) {
+                const open = () => {
+                this.selectedEvent = event
+                this.selectedElement = nativeEvent.target
+                requestAnimationFrame(() => requestAnimationFrame(() => this.selectedOpen = true))
+                }
+
+                if (this.selectedOpen) {
+                this.selectedOpen = false
+                requestAnimationFrame(() => requestAnimationFrame(() => open()))
+                } else {
+                open()
+                }
+
+                nativeEvent.stopPropagation()
+            },
+        showEvent2 ({ nativeEvent, event }) {
+                const open = () => {
+                this.selectedEvent2 = event
+                this.selectedElement2 = nativeEvent.target
+                requestAnimationFrame(() => requestAnimationFrame(() => this.selectedOpen2 = true))
+                }
+
+                if (this.selectedOpen2) {
+                this.selectedOpen2 = false
+                requestAnimationFrame(() => requestAnimationFrame(() => open()))
+                } else {
+                open()
+                }
+
+                nativeEvent.stopPropagation()
+            },
+        showEvent3 ({ nativeEvent, event }) {
+                const open = () => {
+                this.selectedEvent3 = event
+                this.selectedElement3 = nativeEvent.target
+                requestAnimationFrame(() => requestAnimationFrame(() => this.selectedOpen3 = true))
+                }
+
+                if (this.selectedOpen3) {
+                this.selectedOpen3 = false
+                requestAnimationFrame(() => requestAnimationFrame(() => open()))
+                } else {
+                open()
+                }
+
+                nativeEvent.stopPropagation()
+            },
+        getEventColor (event) {
+            return event.color
+        },
         show(){
             axios.get('show').then(response => {
                 console.log(response.data)
                this.events = response.data
-
-
+            })
+        },
+        showTray(){
+            axios.get('getTray').then(response => {
+                console.log(response.data)
+               this.trays = response.data
+            })
+        },
+        showRent(){
+            axios.get('shows').then(response => {
+                console.log(response.data)
+               this.rents = response.data
             })
         },
         incrementSold(){

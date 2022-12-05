@@ -271,7 +271,7 @@
                 <v-select
                     :items="packages"
                     v-model="payload.packages"
-                    filled
+                    outlined
                     item-text="name"
                     item-value="name"
                     label="Packages"
@@ -282,7 +282,7 @@
                 <v-select
                     :items="show"
                     v-model="price"
-                    filled
+                    outlined
                     item-text="price_per_head"
                     label="Available Price per Head"
                 ></v-select>
@@ -305,7 +305,17 @@
                     label="Amount"
                     outlined
                 ></v-text-field>
-                <span style="display: none;">{{this.payload.amount = this.price * this.payload.head}}</span>
+                <span v-if="payload.payment_type == 'Down Payment'" style="display: none;">{{(this.payload.amount = (this.price * this.payload.head)/2)}}</span>
+                <span v-else style="display: none;">{{this.payload.amount = this.price * this.payload.head}}</span>
+            </v-col>
+            <v-col>
+                <v-select
+                v-model="payload.payment_type"
+                :items="downpayment"
+                outlined
+                label="Payment Type"
+                >
+                </v-select>
             </v-col>
             <v-col>
                 <span>Note: If you have set main dishes exceeds to number based on your set package, the first numbers will only be served</span>
@@ -382,11 +392,36 @@
         <v-col>
                 <v-text-field
                     :rules="rulesCash" 
-
                     v-model="payloadTray.quantity"
                     label="Quantity"
                     outlined
                 ></v-text-field>
+            </v-col>
+            <v-col>
+                    <v-menu
+                        v-model="menu2"
+                        :close-on-content-click="false"
+                        :nudge-right="40"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                    >
+                        <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                            v-model="payloadTray.start"
+                            label="Desired Date to Deliver"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                            outlined
+                        ></v-text-field>
+                        </template>
+                        <v-date-picker
+                        v-model="payloadTray.start"
+                        @input="menu2 = false"
+                        ></v-date-picker>
+                    </v-menu>
             </v-col>
             
             <span style="display:none;">{{payloadTray.total = payloadTray.quantity * payloadTray.pricetray}}</span>
@@ -508,7 +543,31 @@
                             label="Total"
                             outlined
                             readonly
-                        ></v-text-field> 
+                        ></v-text-field>
+                    <v-menu
+                        v-model="menu2"
+                        :close-on-content-click="false"
+                        :nudge-right="40"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                    >
+                        <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                            v-model="editedItem.start"
+                            label="Desired Date to Deliver"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                            outlined
+                        ></v-text-field>
+                        </template>
+                        <v-date-picker
+                        v-model="editedItem.start"
+                        @input="menu2 = false"
+                        ></v-date-picker>
+                    </v-menu>
                     </div>
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -663,6 +722,7 @@ import axios from '../plugins/axios'
                     pricetray: '',
                     quantity: '',
                     total: '',
+                    start: '',
                     gcashtray: '',
                     emailtray: ''
                 },
@@ -706,7 +766,8 @@ import axios from '../plugins/axios'
                 name: '',
                 price: '',
                 quantity: '',
-                total : ''
+                total : '',
+                start: ''
                 },
                 defaultItem: {
                 name: '',
@@ -715,7 +776,11 @@ import axios from '../plugins/axios'
                 loading: true,
                 totals : {
                     text : ''
-                }
+                },
+                downpayment : [
+                    "Full Payment",
+                    "Down Payment"
+                ]
 
                 
             }

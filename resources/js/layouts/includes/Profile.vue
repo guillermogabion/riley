@@ -166,7 +166,8 @@
               <thead>
                 <tr>
                   <th>Event Type</th>
-                  <th>Date</th>
+                  <th>Date Requested</th>
+                  <th>Event Date</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -174,7 +175,10 @@
                 <tr v-for="catering in records.catering" :key="catering.id">
                   <td>{{ catering.event_type }}</td>
                   <td>{{ catering.created_at }}</td>
-                  <td>{{ catering.status }}</td>
+                  <td>{{ catering.start }}</td>
+                  <!-- <td>{{ catering.status }}</td> -->
+                  <td v-if="(catering.status == 0)"> Pending </td>
+                  <td v-else> Approved </td>
                 </tr>
               </tbody>
             </table>
@@ -191,7 +195,8 @@
               <thead>
                 <tr>
                   <th>Order</th>
-                  <th>Date</th>
+                  <th>Date Requested</th>
+                  <th>Date to Be Delivered</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -199,7 +204,10 @@
                 <tr v-for="tray in records.tray" :key="tray.id">
                   <td> {{ tray.order }}</td>
                   <td> {{ tray.created_at }}</td>
-                  <td> {{ tray.status }}</td>
+                  <td> {{ tray.start }}</td>
+                  <!-- <td> {{ tray.status }}</td> -->
+                  <td v-if="(tray.status == 0)"> Pending </td>
+                  <td v-else> Approved </td>
                 </tr>
               </tbody>
             </table>
@@ -215,7 +223,8 @@
                   <thead>
                     <tr>
                       <th>Supply</th>
-                      <th>Date</th>
+                      <th>Date Requested</th>
+                      <th>Date to Be Delivered</th>
                       <th>Status</th>
                     </tr>
                   </thead>
@@ -223,7 +232,10 @@
                     <tr v-for="rent in records.rent" :key="rent.id">
                       <td> {{ rent.supply_name }}</td>
                       <td> {{ rent.created_at }}</td>
-                      <td> {{ rent.status }}</td>
+                      <td> {{ rent.start }}</td>
+                      <!-- <td> {{ rent.status }}</td> -->
+                      <td v-if="(rent.status == 0)"> Pending </td>
+                      <td v-else> Approved </td>
                     </tr>
                   </tbody>
                 </table>

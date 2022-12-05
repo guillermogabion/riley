@@ -8,7 +8,7 @@ class Rent extends Model
 {
     //
     protected $fillable = [
-        'user_id', 'supply_name', 'price', 'quantity', 'total', 'status', 'is_paid'
+        'user_id', 'supply_name', 'price', 'quantity', 'total', 'status', 'is_paid', 'start'
     ];
     protected $casts = [
         'created_at'  => 'date:m-d-Y',

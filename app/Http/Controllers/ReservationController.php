@@ -100,7 +100,7 @@ class ReservationController extends Controller
                 // 'x-public-key' => 'pk_a63c3c432c45f68d0607100765d7d768',
                 'x-public-key' => 'pk_aa53096ced53364e971b490ef210320c',
                 'amount' => $request['amount'],
-                'description' => 'Payment for' . ' ' . $request['packages'],
+                'description' => 'Payment for' . ' ' . $request['packages'] . ' ' . 'as' . ' ' . $request['payment_type'],
                 'customermobile' => $request['gcash'],
             ),
         ));

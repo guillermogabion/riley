@@ -18,6 +18,7 @@ class TrayController extends Controller
         $data->order = $request->order;
         $data->quantity = $request->quantity;
         $data->total = $request->total;
+        $data->start = $request->start;
         $data->price = $request->pricetray;
         $data->save();
 
