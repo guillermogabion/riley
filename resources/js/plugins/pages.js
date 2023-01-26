@@ -1,5 +1,6 @@
 import Main from '../pages/Main.vue'
 import Login from '../pages/Login.vue'
+import Front from '../pages/Front.vue'
 import Register from '../pages/register.vue'
 import Dashboard from '../pages/Admin/Dashboard.vue'
 // User
@@ -42,11 +43,11 @@ export default [{
     component: Main,
     meta: { authOnly: true },
     children: [
-        {
-            path: '/',
-            component: Dashboard,
-            meta: { authOnly: true },
-        },
+        // {
+        //     path: '/',
+        //     component: Dashboard,
+        //     meta: { authOnly: true },
+        // },
         {
             path: '/dashboard',
             name: 'dashboard',
@@ -163,6 +164,12 @@ export default [{
     name: 'attendance',
     component: Attendance,
     meta: {authOnly: true}
+},
+{
+    path: '/',
+    name: 'front',
+    component: Front,
+    meta: { authOnly: false },
 },
 {
     path: '/design',

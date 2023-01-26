@@ -20,12 +20,12 @@ const router = new VueRouter({
 
 function guardRoutes(to, next) {
     const guest_routes = [
-        'login'
+        'login', 'front'
     ]
     if ((guest_routes.includes(to.name)) && localStorage.getItem('token') === '') {
         next()
     } else if (localStorage.getItem('token') === '') {
-        next({ name: 'login' })
+        next({ name: 'front' })
     } else if (guest_routes.includes(to.name)) {
         next({ name: 'dashboard' })
     } else {
