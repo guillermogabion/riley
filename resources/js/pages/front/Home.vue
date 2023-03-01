@@ -53,10 +53,10 @@
         <v-row class="mx-5">
             <v-col>
                 <v-img
-                :src="image"
-                height="500px"
-                width="860px"
-                class="rounded-lg"
+                    :src="image"
+                    height="500px"
+                    width="860px"
+                    class="rounded-lg rounded-img"
                 ></v-img>
             </v-col>
             <v-col>
@@ -86,6 +86,7 @@
                     <div align="center">
                        <v-btn
                        color="yellow"
+                       
                        >View Our Themes Collection</v-btn>
                     </div>
                     
@@ -98,7 +99,7 @@
                 :src="image"
                 height="500px"
                 width="860px"
-                class="rounded-lg"
+                class="rounded-lg rounded-img"
                 ></v-img>
             </v-col>
         </v-row>
@@ -108,10 +109,11 @@
         <v-row class="mx-5">
             <v-col>
                 <v-img
-                :src="image"
+                :src="image3"
                 height="500px"
                 width="860px"
-                class="rounded-lg"
+                class="rounded-lg rounded-img"
+                style="border-radius: 10px 0 0 10px;"
                 ></v-img>
             </v-col>
             <v-col>
@@ -121,8 +123,9 @@
                <p align="center" class="text-content my-4">Browse food packed and food trays that are perfect for 10 pax!</p>
                <div align="center">
                     <v-btn
+                    @click="$vuetify.goTo('#services')"
                     color="yellow"
-                    >View Our Themes Collection</v-btn>
+                    >Order Now</v-btn>
                 </div>
             </v-col>
         </v-row>
@@ -135,14 +138,14 @@
             >
                 <v-sheet>
                     <v-row align="center"
-                    justify="center" class="font-weight-bold content top">EVENT THEMES</v-row>
+                    justify="center" class="font-weight-bold content top">Party needs Rental</v-row>
 
-                    <p align="center" class="text-content my-4">Looking to create a one-of-a-kind and lovely atmosphere for your event?</p>
-                    <p align="center" class="text-content my-4">Our event stylists will collaborate with you to create the look and feel you want. Find ideas for your event by looking through our past event styles and designs.</p>
+                    <p align="center" class="text-content my-4">As One of the best food catering and events services in the Region IV-A. Riley’s Catering Services is committed to providing rentals of party needs for your events.</p>
                     <div align="center">
                        <v-btn
                        color="yellow"
-                       >View Our Themes Collection</v-btn>
+                       @click="$vuetify.goTo('#services')"
+                       >Rent Now!</v-btn>
                     </div>
                     
                 </v-sheet>
@@ -154,30 +157,8 @@
                 :src="image"
                 height="500px"
                 width="860px"
-                class="rounded-lg"
+                class="rounded-lg rounded-img"
                 ></v-img>
-            </v-col>
-        </v-row>
-    </div>
-    <div class="my-3 mx-2">
-        <v-row class="mx-5">
-            <v-col>
-                <v-img
-                :src="image"
-                height="500px"
-                width="860px"
-                class="rounded-lg"
-                ></v-img>
-            </v-col>
-            <v-col>
-                <v-row align="center"
-                justify="center" class="font-weight-bold content top">Party needs Rental</v-row>
-            <p align="center" class="text-content my-4">As One of the best food catering and events services in the Region IV-A. Riley’s Catering Services is committed to providing rentals of party needs for your events.</p>
-            <div align="center">
-                    <v-btn
-                    color="yellow"
-                    >Rent Now</v-btn>
-                </div>
             </v-col>
         </v-row>
     </div>
@@ -187,12 +168,14 @@
 import hero from '../../assets/front/theme15.4.jpg'
 import image from '../../assets/front/theme13.4.jpg'
 import image2 from '../../assets/front/theme13.4.jpg'
+import image3 from '../../assets/food/cover_food.jpg'
 
 export default {
     data() {
         return {
             image,
             image2,
+            image3,
             hero,
             items: [
                 {
@@ -212,7 +195,7 @@ export default {
     },
 }
 </script>
-<style>
+<style scoped>
     .bg-image {
     /* The image used */
         background-image: url("../../assets/front/theme15.4.jpg");
@@ -319,6 +302,14 @@ export default {
     }
     .content {
         font-size: 2vw;
+    }
+    .v-image__image, .v-image__placeholder{
+    border-radius: 100%;
+    }
+    .rounded-img {
+        border-radius: 150% !important; 
+        height:500px;
+        width:860px;
     }
     /* .bottom-spacing {
         margin-bottom: -3%;

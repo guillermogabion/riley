@@ -48,6 +48,7 @@ export default {
             menus : [
                 {title : 'Food/Drinks', icon: "mdi mdi-food", route: '/setting/item'  },
                 {title : 'Supplies',  icon: 'mdi-alpha-s-box', route: '/setting/category' },
+                {title : 'Gallery',  icon: 'mdi-alpha-s-box', route: '/setting/gallery' },
              
             ]
         }

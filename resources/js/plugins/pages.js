@@ -19,6 +19,7 @@ import NavSetting from '../pages/settings/navsetting.vue'
 import Items from '../pages/settings/includes/item.vue'
 import Delivery from '../pages/settings/includes/delivery.vue'
 import Category from '../pages/settings/includes/category.vue'
+import Gallery from '../pages/settings/includes/gallery.vue'
 
 import Attendance from '../pages/Attendance.vue'
 
@@ -105,6 +106,12 @@ export default [{
                     path: '/setting/category',
                     name: 'category',
                     component: Category,
+                    meta: { authOnly: true }
+                },
+                {
+                    path: '/setting/gallery',
+                    name: 'gallery',
+                    component: Gallery,
                     meta: { authOnly: true }
                 },
 

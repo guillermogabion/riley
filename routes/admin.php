@@ -40,11 +40,8 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
 
     Route::post('payment', 'GCashController@payment');
 
-    Route::get('getPack', 'PackageController@getPackage');
-    Route::post('packShow', 'PackageController@search');
 
     Route::get('getFood', 'FoodController@search');
-    Route::get('getFood2', 'FoodController@search2');
 
     Route::post('serveTray', 'TrayController@addTray');
     Route::get('getTray', 'TrayController@show');
@@ -56,19 +53,15 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
     Route::get('records', 'DashboardController@records');
     Route::get('history', 'DashboardController@history');
 
-    Route::post('OrderShow', 'TrayController@search');
 
-    Route::get('foodpicture', 'FoodController@picture');
     Route::put('food_status/{id}', 'FoodController@status');
 
 
     // supply 
 
-    Route::get('getAllSupply', 'SupplyController@getAllSupply');
     Route::post('addSupply', 'SupplyController@addSupply');
     Route::post('editSupply/{id}', 'SupplyController@editSupply');
 
-    Route::get('getmyRent', 'RentController@getmyCheckout');
     Route::post('checkOut', 'RentController@checkOut');
     Route::put('updateIspaid', 'RentController@updateIspaid');
     Route::get('shows', 'RentController@show');
@@ -78,3 +71,11 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
     Route::post('payment', 'RentController@payment');
     Route::delete('deleterent/{id}', 'RentController@deleterent');
 });
+
+Route::get('getFood2', 'FoodController@search2');
+Route::post('OrderShow', 'TrayController@search');
+Route::post('packShow', 'PackageController@search');
+Route::get('getPack', 'PackageController@getPackage');
+Route::get('getAllSupply', 'SupplyController@getAllSupply');
+Route::get('getmyRent', 'RentController@getmyCheckout');
+Route::get('foodpicture', 'FoodController@picture');

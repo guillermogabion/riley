@@ -12,8 +12,7 @@
                 <!-- <img src="../../assets/logo.png" alt="Logo" /> -->
             </v-list-item-avatar>
             <v-list-item-content>
-                <v-list-item-title class="title">Healthcare</v-list-item-title>
-                <v-list-item-subtitle>WEB</v-list-item-subtitle>
+                <v-list-item-title class="title">Riley's Catering</v-list-item-title>
             </v-list-item-content>
             </v-list-item>
         </v-list>
@@ -65,6 +64,12 @@
           <v-btn text @click="$vuetify.goTo('#services')">
           <span class="mr-2">Services</span>
           </v-btn>
+          <v-btn text @click="$vuetify.goTo('#about')">
+            <span class="mr-2">About</span>
+          </v-btn>
+          <v-btn text @click="$vuetify.goTo('#faq')">
+          <span class="mr-2">FAQ</span>
+          </v-btn>
         </div>
       </v-app-bar>
     </div>
@@ -79,6 +84,8 @@ export default {
     items: [
       ["mdi-home-outline", "Home", "#hero"],
       ["mdi-information-outline", "Services", "#services"],
+      ["mdi-information-outline", "About", "#about"],
+      ["mdi-comment-question-outline", "Services", "#faq"],
     ],
   }),
   props: {

@@ -4,6 +4,47 @@
         <v-main class="pt-0">
             <home />
             <services />
+            <about/>
+            <faq />
+            <v-footer
+                dark
+                padless
+            >
+                <v-card
+                class="flex"
+                flat
+                tile
+                >
+                <div align="center" class="justify-center pt-1">
+                    <v-img
+                        :src="footer_image"
+                        height="70px"
+                        width="70px"
+                        class="rounded-lg"
+                        ></v-img>
+                </div>
+                <v-card-text class="py-2 white--text text-center">
+                    <span>8:00 AM to 7:00 PM | Monday to Sunday &nbsp &nbsp &nbsp &nbsp 520 M. Santos St. Sta Cruz Cavite City, Cavite</span> <br>
+                    <span>Catering Services (CP No.) |  (CP No.)  |  (Tel. No.) </span>  <br>
+                    <span>Food Order  (CP No.) |  (Tel. No.)</span>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                        <v-btn
+                            v-for="icon in icons"
+                            :key="icon"
+                            class="mx-4"
+                            dark
+                            icon
+                            >
+                            <v-icon size="24px">
+                                {{ icon }}
+                            </v-icon>
+                        </v-btn>
+                    <v-spacer></v-spacer>
+                </v-card-actions>
+                </v-card>
+            </v-footer>
         </v-main>
         <v-scale-transition>
         <v-btn
@@ -20,6 +61,7 @@
             <v-icon>mdi-arrow-up</v-icon>
         </v-btn>
         </v-scale-transition>
+       
     </v-app>
 </template>
 <style scoped>
@@ -35,13 +77,20 @@
 import navigation from './front/Navigation.vue'
 import home from './front/Home.vue'
 import services from './front/Services.vue'
-
+import about from './front/About.vue'
+import faq from './front/FAQ.vue'
+import footer_image from '../assets/rileylogo.png'
 
 export default {
     data: () => ({
+        footer_image,
         fab: null,
         color: "",
         flat: null,
+        icons: [
+        'mdi-facebook',
+        'mdi-instagram',
+      ],
     }),
     created() {
         const top = window.pageYOffset || 0;
@@ -75,6 +124,8 @@ export default {
         navigation,
         home,
         services,
+        about,
+        faq
     }
 }
 </script>
