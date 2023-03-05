@@ -11,6 +11,7 @@ import store from './store';
 import Vue from 'vue';
 import VueChart from 'vue-chart-js'
 import moment from 'moment'
+import App2 from './layouts/App2.vue' 
 
 
 Vue.prototype.moment = moment
@@ -25,3 +26,7 @@ const app = new Vue({
     el: '#app',
     render: h => h(App),
 });
+
+
+  
+  

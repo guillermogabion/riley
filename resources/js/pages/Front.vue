@@ -1,9 +1,12 @@
 <template>
+    <div id="app2">
     <v-app>
         <navigation :color="color" :flat="flat" />
         <v-main class="pt-0">
             <home />
             <services />
+            <gallery />
+            <foodpic /> 
             <about/>
             <faq />
             <v-footer
@@ -63,6 +66,7 @@
         </v-scale-transition>
        
     </v-app>
+</div>
 </template>
 <style scoped>
 .v-main {
@@ -79,10 +83,14 @@ import home from './front/Home.vue'
 import services from './front/Services.vue'
 import about from './front/About.vue'
 import faq from './front/FAQ.vue'
+import foodpic from './front/foodpic.vue'
+import gallery from './front/gallery.vue'
 import footer_image from '../assets/rileylogo.png'
+import axios from '../plugins/axios'
 
 export default {
     data: () => ({
+        gallery : false,
         footer_image,
         fab: null,
         color: "",
@@ -91,6 +99,7 @@ export default {
         'mdi-facebook',
         'mdi-instagram',
       ],
+      items : [],
     }),
     created() {
         const top = window.pageYOffset || 0;
@@ -98,6 +107,9 @@ export default {
         this.color = "transparent";
         this.flat = true;
         }
+    },
+    mounted() {
+        this.getPictures()
     },
     watch: {
         fab(value) {
@@ -119,13 +131,24 @@ export default {
         toTop() {
             this.$vuetify.goTo(0);
         },
+        getPictures(){
+            axios.get('getGalleries').then(response => {
+                console.log(response.data)
+                this.items = response.data
+            })
+      },
+      openMe(){
+        this.gallery = true
+      }
     },
     components : {
         navigation,
         home,
         services,
         about,
-        faq
+        faq,
+        gallery,
+        foodpic
     }
 }
 </script>

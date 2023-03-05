@@ -64,6 +64,9 @@
           <v-btn text @click="$vuetify.goTo('#services')">
           <span class="mr-2">Services</span>
           </v-btn>
+          <v-btn text @click="$vuetify.goTo('#gallery')">
+          <span class="mr-2">Gallery</span>
+          </v-btn>
           <v-btn text @click="$vuetify.goTo('#about')">
             <span class="mr-2">About</span>
           </v-btn>
@@ -82,10 +85,11 @@ export default {
     drawer: null,
     isXs: false,
     items: [
-      ["mdi-home-outline", "Home", "#hero"],
-      ["mdi-information-outline", "Services", "#services"],
-      ["mdi-information-outline", "About", "#about"],
-      ["mdi-comment-question-outline", "Services", "#faq"],
+      ["", "Home", "#hero"],
+      ["", "Services", "#services"],
+      ["", "Gallery", "#gallery"],
+      ["", "About", "#about"],
+      ["", "Services", "#faq"],
     ],
   }),
   props: {

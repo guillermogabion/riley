@@ -48,6 +48,11 @@ class RentController extends Controller
         return Rent::where('is_paid', 1)->with('users')->orderBy('id', 'DESC')->get();
     }
 
+    public function getAllSupply()
+    {
+        return Rent::get();
+    }
+
     public function status($id)
     {
         $data = Rent::find($id);
@@ -63,22 +68,17 @@ class RentController extends Controller
     public function checkOut(Request $request)
     {
         $data = new Rent();
-        $exist = Rent::where('supply_name', $request->name)->where('is_paid', 0)->where('user_id', Auth::user()->id)->exists();
-        if ($exist) {
-            return response()->json([
-                "message" => "File Already Exists"
-            ]);
-        } else {
-            $data->user_id = Auth::user()->id;
-            $data->supply_name = $request->name;
-            $data->price = $request->price;
-            $data->quantity = $request->quantity;
-            $data->total = $request->total;
-            $data->start = $request->start;
-            $data->save();
 
-            return $data;
-        }
+        $data->user = $request->user;
+        $data->contact = $request->contact;
+        $data->supply_name = $request->supply_name;
+        // $data->price = $request->price;
+        $data->quantity = $request->quantity;
+        // $data->total = $request->total;
+        // $data->start = $request->start;
+        $data->save();
+
+        return $data;
     }
 
     public function getmyCheckout()

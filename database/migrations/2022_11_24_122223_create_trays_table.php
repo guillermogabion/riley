@@ -15,7 +15,8 @@ class CreateTraysTable extends Migration
     {
         Schema::create('trays', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('user');
+            $table->string('contact');
             $table->string('order');
             $table->string('price');
             $table->string('quantity');

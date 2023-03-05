@@ -10,6 +10,7 @@ class Food extends Model
     protected $fillable = [
         'name', 'photo', 'price', 'type', 'status'
     ];
+
     //
 
     public function getPhotoAttribute($value)

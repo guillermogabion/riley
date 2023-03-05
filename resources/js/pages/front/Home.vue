@@ -86,7 +86,7 @@
                     <div align="center">
                        <v-btn
                        color="yellow"
-                       
+                       @click="ClickMe()"
                        >View Our Themes Collection</v-btn>
                     </div>
                     
@@ -128,6 +128,7 @@
                     >Order Now</v-btn>
                 </div>
             </v-col>
+            {{ this.items }}
         </v-row>
     </div>
      <div class="my-3 mx-2">
@@ -162,6 +163,8 @@
             </v-col>
         </v-row>
     </div>
+
+   
     </section>
 </template>
 <script>
@@ -169,30 +172,36 @@ import hero from '../../assets/front/theme15.4.jpg'
 import image from '../../assets/front/theme13.4.jpg'
 import image2 from '../../assets/front/theme13.4.jpg'
 import image3 from '../../assets/food/cover_food.jpg'
+import axios from '../../plugins/axios'
+
 
 export default {
     data() {
         return {
+            gallery: false,
+            items : [],
             image,
             image2,
             image3,
             hero,
-            items: [
-                {
-                    src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-                },
-                {
-                    src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-                },
-                {
-                    src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-                },
-                {
-                    src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-                },
-                ],
+          
         }
     },
+    // mounted() {
+    //     this.getPictures()
+    // },
+    methods : {
+        getPictures(){
+            axios.get('getGalleries').then(response => {
+                console.log(response.data)
+                this.items = response.data
+            })
+      }, 
+      ClickMe() {
+        this.$emit("dialogs")
+      }
+    },
+   
 }
 </script>
 <style scoped>

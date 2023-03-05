@@ -17,7 +17,8 @@ class ReservationController extends Controller
 
         $collection = collect($request->dish);
 
-        $data->user_id = Auth::user()->id;
+        $data->user = $request->user;
+        $data->contact = $request->contact;
         $data->name = $request->name;
         $data->event_type = $request->event_type;
         $data->event_theme = $request->event_theme;

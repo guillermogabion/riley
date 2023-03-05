@@ -12,14 +12,14 @@
                         >
                             <v-card
                             :elevation="hover ? 12 : 2"
-                            width="80%"
+                            width="350px"
                             class="ma-4"
                             >
                                 <!-- <div
                                 class="center"
                                 > -->
                                 <div class="d-flex justify-center">
-                                    <span class="mdi mdi-silverware-fork-knife sized"></span>
+                                    <v-img src="images/a.png" />
                                 </div>
                                 
 
@@ -50,14 +50,14 @@
                         >
                             <v-card
                             :elevation="hover ? 12 : 2"
-                            width="80%"
+                            width="350px"
                             class="ma-4"
                             >
                                 <!-- <div
                                 class="center"
                                 > -->
                                 <div class="d-flex justify-center">
-                                    <span class="mdi mdi-silverware-fork-knife sized"></span>
+                                    <v-img src="images/b.png" />
                                 </div>
                                 
 
@@ -88,14 +88,14 @@
                         >
                             <v-card
                             :elevation="hover ? 12 : 2"
-                            width="80%"
+                            width="350px"
                             class="ma-4"
                             >
                                 <!-- <div
                                 class="center"
                                 > -->
                                 <div class="d-flex justify-center">
-                                    <span class="mdi mdi-silverware-fork-knife sized"></span>
+                                    <v-img src="images/c.png" />
                                 </div>
                                 
 
@@ -109,7 +109,7 @@
                                     <v-spacer></v-spacer>
                                     <v-btn
                                     text
-                                    @click="trayDialog = true"
+                                    @click="rentDialog = true"
                                     >
                                         Rent Now
                                     </v-btn>
@@ -131,6 +131,20 @@
             Book a Catering Schedule
         </v-card-title>
         <v-card-text>
+            <v-col>
+                <v-text-field
+                    v-model="payload.user"
+                    label="Name"
+                    outlined
+                ></v-text-field>
+            </v-col>
+            <v-col>
+                <v-text-field
+                    v-model="payload.contact"
+                    label="Contact"
+                    outlined
+                ></v-text-field>
+            </v-col>
             <v-col>
                 <v-text-field
                     :rules="rulesEvent" 
@@ -311,6 +325,21 @@
        </v-card-title>
        <v-card-text>
         <v-col>
+                <v-text-field
+
+                    v-model="payloadTray.user"
+                    label="Name"
+                    outlined
+                ></v-text-field>
+            </v-col>
+        <v-col>
+                <v-text-field
+                    v-model="payloadTray.contact"
+                    label="Contact"
+                    outlined
+                ></v-text-field>
+            </v-col>
+        <v-col>
             <v-select
                 :items="food"
                 v-model="payloadTray.order"
@@ -321,6 +350,7 @@
             ></v-select>
         </v-col>
         <span style="display:none;">{{payloadTray.pricetray = this.tray.price}}</span>
+        
         <v-col>
                 <v-text-field
                     :rules="rulesCash" 
@@ -404,286 +434,91 @@
         </v-card-actions>
     </v-card>
     </v-dialog>
+    <v-dialog
+    v-model="rentDialog"
+    width="500px"
+    >
+      <v-card>
+        <v-card-title class="text-h5 grey lighten-2">
+        Party Need Rentals
+       </v-card-title>
+        <v-col>
+            <v-text-field
+                v-model="payloadRent.user"
+                label="Name"
+                outlined
+            ></v-text-field>
+        </v-col>
+        <v-col>
+            <v-text-field
+                v-model="payloadRent.contact"
+                label="Contact"
+                outlined
+            ></v-text-field>
+        </v-col>
+            <v-col>
+                <v-select
+                :items="supply"
+                v-model="payloadRent.supply_name"
+                filled
+                item-text="name"
+                item-value="name"
+                label="Order"
+            ></v-select>
+        </v-col>
+        <v-col>
+            <v-text-field
+                v-model="payloadRent.quantity"
+                label="Quantity"
+                outlined
+            ></v-text-field>
+        </v-col>
+        <v-card-actions>
+            <v-btn @click="postmyRent()">
+            Submit
+            </v-btn>
+        </v-card-actions>
+        
+      </v-card>
+    </v-dialog>
     </section>
 </template>
-<!-- <script>
-import fork from '../../assets/logos/Untitled-removebg-preview (2).png'
-import fork2 from '../../assets/logos/Untitled2-removebg-preview (2).png'
-import fork3 from '../../assets/logos/Untitled3-removebg-preview.png'
-export default {
-    data() {
-        return {
-            menu2: false,
-            menu: false,
-            fork,
-            fork2,
-            fork3,
-            items : [
-                { id: '1', icon: 'mdi-hospital', title : 'Paralysis Disability', img: '' , description: 'Lorem Ipsum Dolor'  },
-                { id: '2', icon: 'mdi-hospital', title : 'Patient of Beding', img: '' , description: 'Lorem Ipsum Dolor'  },
-                { id: '3', icon: 'mdi-hospital', title : 'Emergency Care Services', img: '' , description: 'Lorem Ipsum Dolor'  },
-                { id: '5', icon: 'mdi-hospital', title : 'Health Laboratory', img: '' , description: 'Lorem Ipsum Dolor'  },
-                { id: '6', icon: 'mdi-hospital', title : 'Emergency Care Services', img: '' , description: 'Lorem Ipsum Dolor'  },
-                { id: '7', icon: 'mdi-hospital', title : 'Emergency Care Services', img: '' , description: 'Lorem Ipsum Dolor'  },
-                { id: '4', icon: 'mdi-hospital', title : 'Emergency Care Services', img: '' , description: 'Lorem Ipsum Dolor'  }
-            ],
-            payload: {
-                    name: '',
-                    amount:'',
-                    event_type: '',
-                    event_theme: '',
-                    packages: '',
-                    dish: '',
-                    dish: '',
-                    gcash: '',
-                    email: '',
-                    amount: '',
-                    start_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-                    end_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-                    price_per_head: '',
-                    head: '',
-                  
-                },
-            model : null,
-            cateringDialog: false,
-            trayDialog: false,
-            rules: [
-                    v => !!v || 'Required',
-                    v => v >= 100 || 'Head count should not below 100',
-                    v => v <= 1000 || 'Max should not be above 1000',
-                ],
-                rulesEvent: [
-                    v => !!v || 'Required',
-                ],
-                rulesAmount: [
-                    v => !!v || 'Required',
-               
-                ],
-                rulesDish: [
-                    v => !!v || 'Required',
-                   
-                ],
-                rulesCash: [
-                    v => !!v || 'Required',
-                ],
-                rulesEmail: [
-                    v => !!v || 'Required',
-                ],
-                payloadTray: {
-                    order: '',
-                    pricetray: '',
-                    quantity: '',
-                    total: '',
-                    start: '',
-                    gcashtray: '',
-                    emailtray: ''
-                },
-                packages:[],
-                show: [],
-                price: '',
-                downpayment : [
-                    "Full Payment",
-                    "Down Payment"
-                ],
-                food: [],
-                tray: [],
-        }
-    },
-    methods: {
-            totalCost1(){
-                {
-                let total = 0
-                this.rent.forEach(item => {
-                    let sum = item.price * item.quantity;
-                    total = parseInt(total + sum);
-                });
-                return total
-                }
-              
-            },
-            getPackage(){
-                axios.get('getPack').then(response => {
-                    console.log(response.data)
-                    this.packages = response.data
-                })
-            },
-            packageShow(key){
-                axios.post('packShow', {searchkey:key}).then(response => {
-                    this.show = response.data
-                  
-                })
-            },
-            OrderShow(key){
-                axios.post('OrderShow', {searchkey:key}).then(response => {
-                    this.tray = response.data
-                  
-                })
-            },
 
-            dishShow(){
-                axios.get('getFood2').then(response=> {
-                    console.log(response.data)
-                    this.food = response.data
-                })
-            },
-            serve(){
-                axios.post('addReservation', this.payload).then(response => {
-                    console.log(response.data)
-                    this.payload.event_type = ''
-                    this.payload.event_theme = ''
-                    this.payload.start_date = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-                    this.payload.end_date = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-                    this.payload.amount = ''
-                    this.payload.packages = ''
-                    this.payload.dish = ''
-                    this.cateringDialog = false;
-                    this.snackbar = true
-                    
-                })
-
-            },
-            serveTray(){
-                axios.post('serveTray', this.payloadTray).then(response => {
-                    console.log(response.data)
-                    this.trayDialog = false
-                    this.snackbar = true
-                })
-
-            },
-            close(){
-                this.cateringDialog = false
-                this.payload = ''
-            },
-            foodPicture(){
-                axios.get('foodpicture').then(response => {
-                    console.log(response.data)
-                    this.items = response.data
-                })
-            },
-            
-            getAllSupply(){
-                axios.get('getAllSupply').then(response => {
-                    this.supply = response.data
-                    console.log(response.data)
-                })
-            },
-            editItemSupply(item){
-                this.editedIndex = this.supply.indexOf(item)
-                this.editedItem = Object.assign({}, item)
-                console.log(this.editedItem)
-            },
-           closeSupply() {
-            this.$nextTick(() => {
-            this.editedItem = Object.assign({}, this.defaultItem)
-            this.editedIndex = -1
-            })
-           },
-           getmyCheck(){
-            axios.get('getmyRent').then(response => {
-                console.log(response.data)
-                this.loading = false
-                this.rent = response.data
-                
-            })
-           },
-           postmyRent(){
-            axios.post('checkOut', this.editedItem).then(response => {
-                this.loading = true
-                console.log(response.data)
-                this.getmyCheck();
-                this.snackbar = true
-                
-            })
-           },
-           submitRent(){
-            axios.put('updateIspaid').then(response=> {
-                console.log(response.data)
-                this.getmyCheck();
-                this.snackbar = true
-                
-            })
-            this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-                })
-                this.supplyDialog = false
-           
-           },
-
-           submitPayment(){
-
-                axios.post('payment', this.totals).then(response=> {
-                    console.log(response.data)
-                })
-                this.$nextTick(() => {
-                    this.submitRent()
-                })
-           },
-           clearRent(){
-            axios.delete('deleteUnPaid').then(response => {
-                console.log(response.data)
-                this.getmyCheck()
-                this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-                })
-                this.supplyDialog = false
-            })
-           }, 
-           deleteItemRent(item){
-            // axios.delete('deleterent/' +)
-
-            console.log(item.id)
-
-            axios.delete('deleterent/' + item.id).then(response => {
-                console.log(response.data)
-                this.loading = true
-                this.getmyCheck()
-            })
-           }
-
-        },
-    watch : {
-        "cateringDialog": {
-            handler(val){
-                val || this.close
-            }
-        }
-    }
-}
-</script> -->
 <script>
 
 
 import fork from '../../assets/logos/Untitled-removebg-preview (2).png'
 import fork2 from '../../assets/logos/Untitled2-removebg-preview (2).png'
 import fork3 from '../../assets/logos/Untitled3-removebg-preview.png'
-import axios from '../../plugins/axios'
+import axios from '../../plugins/axios2'
     export default {
         data() {
         return {
+            
+            rentDialog: false,
             menu2: false,
             menu: false,
             fork,
             fork2,
             fork3,
             payload: {
-                    name: '',
-                    amount:'',
-                    event_type: '',
-                    event_theme: '',
-                    packages: '',
-                    dish: '',
-                    dish: '',
-                    gcash: '',
-                    email: '',
-                    amount: '',
-                    start_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-                    end_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-                    price_per_head: '',
-                    head: '',
-                  
-                },
+                user : '',
+                contact: '',
+                name: '',
+                amount:'',
+                event_type: '',
+                event_theme: '',
+                packages: '',
+                dish: '',
+                dish: '',
+                gcash: '',
+                email: '',
+                amount: '',
+                start_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+                end_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+                price_per_head: '',
+                head: '',
+            },
             model : null,
             cateringDialog: false,
             trayDialog: false,
@@ -710,6 +545,8 @@ import axios from '../../plugins/axios'
                     v => !!v || 'Required',
                 ],
                 payloadTray: {
+                    user : '',
+                    contact: '',
                     order: '',
                     pricetray: '',
                     quantity: '',
@@ -718,6 +555,13 @@ import axios from '../../plugins/axios'
                     gcashtray: '',
                     emailtray: ''
                 },
+                payloadRent : {
+                    user : '',
+                    contact: '',
+                    supply_name: '',
+                    quantity: ''
+                },
+                rentss: [],
                 packages:[],
                 show: [],
                 price: '',
@@ -806,7 +650,7 @@ import axios from '../../plugins/axios'
             },
             
             getAllSupply(){
-                axios.get('getAllSupply').then(response => {
+                axios.get('getAllSupplys').then(response => {
                     this.supply = response.data
                     console.log(response.data)
                 })
@@ -831,11 +675,8 @@ import axios from '../../plugins/axios'
             })
            },
            postmyRent(){
-            axios.post('checkOut', this.editedItem).then(response => {
-                this.loading = true
+            axios.post('checkOut', this.payloadRent).then(response => {
                 console.log(response.data)
-                this.getmyCheck();
-                this.snackbar = true
                 
             })
            },
@@ -883,6 +724,11 @@ import axios from '../../plugins/axios'
                 console.log(response.data)
                 this.loading = true
                 this.getmyCheck()
+            })
+           },
+           saveRent(){
+            axios.post('addRent', this.payloadRent).then(response => {
+                console.log(response.data)
             })
            }
 

@@ -37,16 +37,16 @@ export default {
     data () {
         return {
             headers: [
-                {
+            {
                 text: 'Name',
                 align: 'start',
                 sortable: false,
-                value: 'users.fullname',
+                value: 'name',
                 },
+                { text: 'Contact', value: 'contact' },
                 { text: 'Order', value: 'order' },
                 { text: 'Quantity', value: 'quantity' },
                 { text: 'Price', value: 'price' },
-                { text: 'Quantity', value: 'quantity' },
                 {text: 'Total', value: 'total'},
                 { text: 'Status', value: 'status' },
             ],

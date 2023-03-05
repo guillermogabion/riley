@@ -17,10 +17,12 @@
 <body class="antialiased">
 
     <div id="app">
+        <div id="app2">
 
-    </div>
-    <script async defer src="{{ mix('js/app.js') }}"></script>
-    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+        </div>
+        <script async defer src="{{ mix('js/app.js') }}"></script>
+        <script async defer src="{{ mix('js/app2.js') }}"></script>
+        <!-- <script src="{{ asset('js/app.js') }}"></script> -->
 </body>
 
 </html>

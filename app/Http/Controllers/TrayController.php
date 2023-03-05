@@ -14,7 +14,8 @@ class TrayController extends Controller
     {
         $data = new Tray();
 
-        $data->name = Auth::user()->id;
+        $data->name = $request->user;
+        $data->contact = $request->contact;
         $data->order = $request->order;
         $data->quantity = $request->quantity;
         $data->total = $request->total;

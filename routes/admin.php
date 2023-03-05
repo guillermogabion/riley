@@ -32,18 +32,17 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
     Route::get('getType', 'TypeController@getAll');
 
     // reservations 
-    Route::get('show', 'ReservationController@show');
-    Route::post('addReservation', 'ReservationController@addReservation');
-    Route::post('editReservation/{id}', 'ReservationController@editReservation');
-    Route::put('statusReserve/{id}', 'ReservationController@status');
-    Route::delete('deleteReserve/{id}', 'ReservationController@deleteReserve');
+    // Route::get('show', 'ReservationController@show');
+    // Route::post('addReservation', 'ReservationController@addReservation');
+    // Route::post('editReservation/{id}', 'ReservationController@editReservation');
+    // Route::put('statusReserve/{id}', 'ReservationController@status');
+    // Route::delete('deleteReserve/{id}', 'ReservationController@deleteReserve');
 
-    Route::post('payment', 'GCashController@payment');
+    // Route::post('payment', 'GCashController@payment');
 
 
-    Route::get('getFood', 'FoodController@search');
+    // Route::get('getFood', 'FoodController@search');
 
-    Route::post('serveTray', 'TrayController@addTray');
     Route::get('getTray', 'TrayController@show');
     Route::put('trayStatus/{id}', 'TrayController@status');
 
@@ -61,8 +60,10 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
 
     Route::post('addSupply', 'SupplyController@addSupply');
     Route::post('editSupply/{id}', 'SupplyController@editSupply');
+    Route::get('getAllSupply', 'SupplyController@getAllSupply');
 
-    Route::post('checkOut', 'RentController@checkOut');
+
+    // Route::post('checkOut', 'RentController@checkOut');
     Route::put('updateIspaid', 'RentController@updateIspaid');
     Route::get('shows', 'RentController@show');
     Route::delete('deleteUnPaid', 'RentController@deleteUnPaid');
@@ -70,12 +71,47 @@ Route::group(['prefix' => '/v1', 'middleware' => ['auth:admin-api']], function (
 
     Route::post('payment', 'RentController@payment');
     Route::delete('deleterent/{id}', 'RentController@deleterent');
+
+    Route::get('getGallery', 'GalleryController@show');
+    Route::post('addPicture', 'GalleryController@addPicture');
+    Route::delete('deletePicture/{id}', 'GalleryController@deletePicture');
+
+    Route::get('show', 'ReservationController@show');
 });
 
-Route::get('getFood2', 'FoodController@search2');
-Route::post('OrderShow', 'TrayController@search');
-Route::post('packShow', 'PackageController@search');
-Route::get('getPack', 'PackageController@getPackage');
-Route::get('getAllSupply', 'SupplyController@getAllSupply');
-Route::get('getmyRent', 'RentController@getmyCheckout');
-Route::get('foodpicture', 'FoodController@picture');
+
+Route::group(['prefix' => '/user'], function () {
+
+    Route::get('getFood2', 'FoodController@search2');
+    Route::post('OrderShow', 'TrayController@search');
+    Route::post('packShow', 'PackageController@search');
+    Route::get('getPack', 'PackageController@getPackage');
+    Route::get('getmyRent', 'RentController@getmyCheckout');
+    Route::get('foodpicture', 'FoodController@picture');
+
+
+    Route::post('checkOut', 'RentController@checkOut');
+
+
+    Route::post('payment', 'RentController@payment');
+    Route::delete('deleterent/{id}', 'RentController@deleterent');
+
+    Route::post('addReservation', 'ReservationController@addReservation');
+    Route::post('editReservation/{id}', 'ReservationController@editReservation');
+    Route::put('statusReserve/{id}', 'ReservationController@status');
+    Route::delete('deleteReserve/{id}', 'ReservationController@deleteReserve');
+
+    Route::post('payment', 'GCashController@payment');
+
+
+    Route::get('getFood', 'FoodController@search');
+
+    Route::get('getAllSupplys', 'SupplyController@getAllSupply');
+
+    Route::get('getGalleries', 'GalleryController@getGalleries');
+
+    Route::post('serveTray', 'TrayController@addTray');
+    Route::post('addRent', 'RentController@addRent');
+
+    Route::get('getAllSupply', 'RentController@getAllSupply');
+});
